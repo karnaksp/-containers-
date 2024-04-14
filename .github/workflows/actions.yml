@@ -18,7 +18,8 @@ jobs:
       
     - name: Build project
       run: |
-        make
+      cd src  
+      make
 
   style-check:
     runs-on: ubuntu-latest
@@ -30,7 +31,8 @@ jobs:
       
     - name: Check code style
       run: |
-        output=$(make style-check 2>&1)
+      cd src  
+      output=$(make style-check 2>&1)
         if [ $? -eq 0 ]; then
           echo -e "\e[32mclang-format check passed\e[0m"
         else
