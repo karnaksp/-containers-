@@ -14,7 +14,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2.5.0
+      uses: actions/checkout@develop
       
     - name: Build project
       run: |
@@ -27,7 +27,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2.5.0
+      uses: actions/checkout@develop
 
       
     - name: Check code style
