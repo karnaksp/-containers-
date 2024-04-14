@@ -13,8 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@develop
       
     - name: Build project
       run: |
@@ -26,10 +24,7 @@ jobs:
     needs: build
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@develop
 
-      
     - name: Check code style
       run: |
        cd src  
