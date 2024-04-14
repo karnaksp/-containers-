@@ -1,0 +1,40 @@
+name: Containers
+
+on:
+    push:
+      branches:
+        - develop
+    pull_request:
+      branches:
+        - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Build project
+      run: |
+        make
+
+  style-check:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Check code style
+      run: |
+        output=$(make style-check 2>&1)
+        if [ $? -eq 0 ]; then
+          echo -e "\e[32mclang-format check passed\e[0m"
+        else
+          echo -e "\e[31mclang-format check failed\e[0m"
+          echo "$output"
+          exit 1
+        fi
