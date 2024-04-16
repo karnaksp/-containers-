@@ -1,8 +1,4 @@
 #!/bin/bash
-if [ ! -t 1 ] ; then
-  cat "$@"
-  exit 0
-fi
 
 ncol=$(tput cols)
 

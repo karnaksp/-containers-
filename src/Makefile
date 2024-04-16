@@ -7,13 +7,13 @@ TEST = test
 
 .PHONY: test
 
-all: cat clean test style-check
+all: cat clean test clean
 
 cat: 
 	@chmod +x catgen.sh
 
 test: clean
-	@bash ./catgen.sh UNIT_TEST 4
+	@./catgen.sh UNIT_TEST 4
 	@$(CC) $(CFLAGS) unit_tests/iterator_test.cc -o $(TEST) $(LDFLAGS) $(GCFLAGS)
 	@./$(TEST)
 
@@ -27,6 +27,6 @@ clean:
 	@rm -rf $(TEST)
 
 style-check:
-	@bash ./catgen.sh STYLE_TEST 10
+	@./catgen.sh STYLE_TEST 10
 	@clang-format -n -style=Google *.h  */*.h */*.tcc
 	@if [ $$? -eq 0 ]; then echo "\033[0;32m[  PASSED  ]\033[0m"; else echo "\033[0;31m[  FAILED  ]\033[0m"; fi
