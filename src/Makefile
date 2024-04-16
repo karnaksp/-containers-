@@ -7,7 +7,7 @@ TEST = test
 
 .PHONY: test
 
-all: cat clean test clean
+all: cat clean test style-check
 
 cat: 
 	@chmod +x catgen.sh
