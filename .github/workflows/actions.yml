@@ -1,12 +1,12 @@
 name: Containers
 
 on:
-    push:
-      branches:
-        - develop
-    pull_request:
-      branches:
-        - develop
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
 
 jobs:
   build:
@@ -16,10 +16,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2.5.0
       
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgtest-dev
+
     - name: Build project
       run: |
-       cd src  
-       make
+        cd src  
+        make
 
   style-check:
     runs-on: ubuntu-latest
@@ -29,15 +34,19 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2.5.0
 
-      
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgtest-dev
+
     - name: Check code style
       run: |
-       cd src  
-       output=$(make style-check 2>&1)
-         if [ $? -eq 0 ]; then
-           echo -e "\e[32mclang-format check passed\e[0m"
-         else
-           echo -e "\e[31mclang-format check failed\e[0m"
-           echo "$output"
-           exit 1
-         fi
+        cd src  
+        output=$(make style-check 2>&1)
+        if [ $? -eq 0 ]; then
+          echo -e "\e[32mclang-format check passed\e[0m"
+        else
+          echo -e "\e[31mclang-format check failed\e[0m"
+          echo "$output"
+          exit 1
+        fi
