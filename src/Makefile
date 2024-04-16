@@ -13,7 +13,7 @@ cat:
 	@chmod +x cat.sh
 
 test: clean
-	@./cat.sh "UNIT_TEST" 4
+	@bash ./cat.sh "UNIT_TEST" 4
 	@$(CC) $(CFLAGS) unit_tests/iterator_test.cc -o $(TEST) $(LDFLAGS) $(GCFLAGS)
 	@./$(TEST)
 
@@ -28,6 +28,6 @@ clean:
 	@rm -rf $(TEST)
 
 style-check:
-	@./cat.sh "STYLE_TEST" 10
+	@bash ./cat.sh "STYLE_TEST" 10
 	@clang-format -n -style=Google *.h  */*.h */*.tcc
 	@if [ $$? -eq 0 ]; then echo "\033[0;32m[  PASSED  ]\033[0m"; else echo "\033[0;31m[  FAILED  ]\033[0m"; fi
