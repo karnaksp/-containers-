@@ -10,7 +10,7 @@ TEST = test
 all: cat clean test style-check
 
 cat: 
-	@chmod +x cat.sh
+	@chmod +x catgen.sh
 
 test: clean
 	@bash ./catgen.sh UNIT_TEST 4
