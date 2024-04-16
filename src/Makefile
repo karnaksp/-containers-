@@ -15,7 +15,8 @@ cat:
 test: clean
 	@./catgen.sh UNIT_TEST 4
 	@$(CC) $(CFLAGS) unit_tests/iterator_test.cc -o $(TEST) $(LDFLAGS) $(GCFLAGS)
-	@./$(TEST)
+	@(./$(TEST) && ./catgen.sh UNIT_TEST_PASSED 60) || ./catgen.sh UNIT_TEST_FAILED 60
+
 
 clean:
 	@rm -rf report
@@ -27,6 +28,10 @@ clean:
 	@rm -rf $(TEST)
 
 style-check:
-	@./catgen.sh STYLE_TEST 10
-	@clang-format -n -style=Google *.h  */*.h */*.tcc
-	@if [ $$? -eq 0 ]; then echo "\033[0;32m[  PASSED  ]\033[0m"; else echo "\033[0;31m[  FAILED  ]\033[0m"; fi
+	@output=$$(clang-format -n -style=Google *.h  */*.h */*.tcc 2>&1); \
+	if [ -n "$$output" ]; then \
+		echo "$$output"; \
+		./catgen.sh STYLE_TEST_FAILED 56; \
+	else \
+		./catgen.sh STYLE_TEST_PASSED 56; \
+	fi
