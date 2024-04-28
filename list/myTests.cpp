@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 
+#include <vector>
 #include <typeinfo>
 
 template <typename T>
@@ -90,6 +91,54 @@ int main() {
     std::cout << "Max template: " << max(5, 10) << std::endl;  // compiler can deduce type
     std::cout << "Type of return of Max template: " << typeid(max<float>(5, 10)).name() << std::endl;
     std::cout << "Min template: " << min<bool>(6, 12) << std::endl;
+
+    std::cout <<"\n\tIterators" << std::endl;
+/*
+    Alows abstracting an arbitrary contaner as a sequence 
+    of elements
+    They are objects that work like pointers by design
+    Most container classes can be traversed with iterators
+*/
+
+/*
+Declaring iterators
+
+Iterators must be declared based on the container type
+they will iterate over
+
+container_type::iterator_type iterator_name;
+
+std::vector<int>::iterator it1;
+std::list<std::string>::iterator it2
+std::map<std::string, std::string>::iterator it3;
+std::set<char>::iterator it4;
+
+*/
+
+/*
+iterator begin and end methods
+std::vector<int> vec {1,2,3};
+vec.begin() - first element
+vec.end() - location after last element
+*/
+std::vector<int> vec {1,2,3};
+std::cout << *vec.begin() << std::endl ;
+std::cout << *vec.end() << std::endl ;
+std::cout << &*vec.begin() << std::endl ;
+std::cout << &*vec.end() << std::endl ;
+
+/*
+Initializing iterators
+
+std::vector<int> vec {1,2,3};
+
+std::vector<int>::iterator it = vec.begin();
+
+or
+
+auto it = vec.begin();
+
+*/
 
 
     return 0;
