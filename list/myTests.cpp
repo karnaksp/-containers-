@@ -122,10 +122,10 @@ vec.begin() - first element
 vec.end() - location after last element
 */
 std::vector<int> vec {1,2,3};
-std::cout << *vec.begin() << std::endl ;
-std::cout << *vec.end() << std::endl ;
-std::cout << &*vec.begin() << std::endl ;
-std::cout << &*vec.end() << std::endl ;
+std::cout << "begin(): " << *vec.begin() << std::endl ;
+std::cout << "end():   " << *vec.end() << std::endl ;
+std::cout << "&*vec.begin(): "<< &*vec.begin() << std::endl ;
+std::cout << "&*vec.end():   "<< &*vec.end() << std::endl ;
 
 /*
 Initializing iterators
@@ -137,9 +137,47 @@ std::vector<int>::iterator it = vec.begin();
 or
 
 auto it = vec.begin();
-
 */
 
+/*
+Operations with iterators (it)
+++it
+it++
+it = it1
+*it
+it->
+it == it1
+it != it1
+--it
+it--
+it + i ; it += i ; it - i; it -= i;
+it < it1 ; it <= it1; it > it1; it >= it1;
+*/
+
+/*
+Using iterators - std::vector
+
+std::vector<int> vec {1,2,3};
+
+std::vector<int>::iterator it = vec.begin();
+
+while (it != vec.end()) {
+    std::cout << *it << " ";
+    ++it;
+}
+// 1 2 3
+*/
+std::cout << "\n\tUsing iterators" << std::endl;
+std::vector<int> vec1 {1,2,3};
+std::vector<int>::iterator it = vec1.begin();
+while (it != vec1.end()) {
+    std::cout << *it << " ";
+    ++it;
+}
+std::cout << "\n";
+
+
+// 800 pdf
 
     return 0;
 }
