@@ -53,7 +53,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libgtest-dev
+        sudo apt-get install -y check libsubunit-dev libgtest-dev
 
     - name: Run unit tests
       run: |
@@ -73,7 +73,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libgtest-dev
+        sudo apt-get install -y check libsubunit-dev lcov libgtest-dev
 
     - name: Generate code coverage report
       run: |
@@ -94,7 +94,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libgtest-dev
+        sudo apt-get install -y check libsubunit-dev valgrind libgtest-dev
 
     - name: Run Valgrind test
       run: |
