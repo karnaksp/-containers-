@@ -4,6 +4,16 @@
 #include <vector>
 #include <typeinfo>
 
+#include <limits>
+#include <algorithm>
+void print_list(std::list<int> vec2) {
+    int i {0};
+    for (auto it = vec2.begin(); it != vec2.end(); it++) {
+        std::cout << i++ << ": " << *it << " | " <<  &*it  << std::endl;
+    }
+    std::cout << "end(): "<< &*vec2.end() << std::endl;
+}
+
 template <typename T>
 T max(T a, T b) {
     return (a > b) ? a : b;
@@ -171,13 +181,73 @@ std::cout << "\n\tUsing iterators" << std::endl;
 std::vector<int> vec1 {1,2,3};
 std::vector<int>::iterator it = vec1.begin();
 while (it != vec1.end()) {
-    std::cout << *it << " ";
+    std::cout << *it << " " << std::endl;
+    std::cout << &*it << " " << std::endl;
+
     ++it;
+    if (vec1.end() == it) {
+        std::cout << &*it << std::endl;
+    }
 }
 std::cout << "\n";
 
 
-// 800 pdf
+/*
+range for loop
+*/
+std::cout << "\n\tUsing iterators - range for loop" << std::endl;
+std::vector<int> vec2 {1,2,3};
+for (auto it = vec2.begin(); it != vec2.end(); it++) {
+    std::cout << *it << " " << std::endl;
+    std::cout << &*it << " " << std::endl;
+    if (vec2.end() == it + 1) {
+        std::cout << &*vec2.end() << std::endl;
+    }
+}
+std::cout << "\n";
 
+
+// 835 pdf
+
+/*
+std::list
+
+list is bidirectional (doubly-linked)
+
+Rapid insertion and deletion of elements 
+anywhere in the container (constant time)
+*/
+
+std::cout << "\n\tList" << std::endl;
+std::list<int> list_1 {1,2,3,4,5};
+std::cout << *list_1.begin() << std::endl;
+std::cout << *list_1.end() << std::endl;
+std::cout << "First element: " << list_1.front() << std::endl;
+std::cout << "Last element:  " << list_1.back() << std::endl;
+std::cout << "Size        :  " << list_1.size() << std::endl;
+list_1.push_back(6);  // add to the back
+list_1.pop_back();    // remove from the back
+list_1.push_front(-1); // add to the front
+list_1.pop_front();    // remove element from the front
+std::cout << "My max size : " << std::numeric_limits<std::size_t>::max() / (sizeof(int) * 8 + 2 * sizeof(int*) ) << std::endl;
+std::cout << "std max size: "<< list_1.max_size() << std::endl;
+std::cout << "Size of 1 element of list: "<< sizeof(list_1) << std::endl;
+std::cout << "Size of 1 element of int : "<< sizeof(list_1.front()) << std::endl;
+std::cout << "Size of 1 element of it  : "<< sizeof(list_1.begin()) << std::endl;
+
+print_list(list_1);
+
+std::cout << "\n\tPractice with List" << std::endl;
+std::list<int> list_2 {1, 2, 3, 4};
+list_2.push_front(-10);
+list_2.push_back(10);
+print_list(list_2);
+
+std::cout << "\n\tPractice with List insert" << std::endl;
+std::list<int> list_3 {1,2,3,4,5};
+auto it2 = std::find(list_3.begin(), list_3.end(), 3);
+list_3.insert(it2, 10);  // 1 2 10 3 4 5
+list_3.erase(it2);       // erases the 3, 1 2 10 4 5
+print_list(list_3);
     return 0;
 }
