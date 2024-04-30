@@ -50,9 +50,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2.5.0
 
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgtest-dev
+
     - name: Run unit tests
       run: |
         cd src
+        make build
         make test
 
   gcov-report:
@@ -63,10 +69,17 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2.5.0
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgtest-dev
 
     - name: Generate code coverage report
       run: |
         cd src
+        make build
+        make test
         make gcov_report
 
   valgrind-test:
@@ -78,7 +91,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2.5.0
 
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgtest-dev
+
     - name: Run Valgrind test
       run: |
         cd src
+        make build
+        make test
         make valgrind
