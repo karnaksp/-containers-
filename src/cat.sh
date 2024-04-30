@@ -1,5 +1,8 @@
 #!/bin/bash
-export TERM=xterm
+if [ ! -t 1 ] ; then
+  cat "$@"
+  exit 0
+fi
 
 ncol=$(tput cols)
 
@@ -27,17 +30,11 @@ DRAWING_POSITION=25
 arrayLen=${#t[@]}
 halfDrawingLen=$((DRAWING_WIDTH / 2))
 
-if [ -z "$1" ] || [ -z "$2" ]; then
-    echo "Usage: $0 <string> <number>"
-    exit 1
+if [ -z "$2" ]; then
+    leadingSpaces=$((ncol * DRAWING_POSITION / 100 - halfDrawingLen))
+else
+    leadingSpaces=$((($2 - halfDrawingLen)))
 fi
-
-if ! [[ "$2" =~ ^[0-9]+$ ]]; then
-    echo "Second argument must be a number"
-    exit 1
-fi
-
-leadingSpaces=$((($2 - halfDrawingLen)))
 
 if [[ $leadingSpaces -lt 0 ]]; then
   leadingSpaces=0
