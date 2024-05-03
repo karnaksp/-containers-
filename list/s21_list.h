@@ -7,10 +7,16 @@
 namespace s21 {
 
 template<class T>
-struct Node {
-    T value;
-    Node* next;
-    Node* prev;
+class Node {
+public:
+    T value_;
+    Node* next_;
+    Node* prev_;
+
+public:
+    void insert_node(const Node<T> &new_node);
+    
+    void delete_current_node();
 };
 
 template<class T>
@@ -25,20 +31,39 @@ public:
 private:
     Node<T>* current;
 public:
+    // constructor with address parametr
+    ListIterator(Node<T>* address);
+
+    // Copy constructor
+    ListIterator(const ListIterator &other);
+
+    // Move constructor
+    ListIterator(ListIterator &&other);
+
+    // Destructor
+    ~ListIterator();
+
+    // Copy assignment operator(=).
+    ListIterator& operator=(const ListIterator &rhs);
+
+    // Move assignment operator(=).
+    ListIterator& operator=(ListIterator && rhs);
+
+    
     value_type& operator*();
 
-    // prefix
+    // prefix ++
     ListIterator<T>& operator++();  
 
-    // postfix
+    // postfix ++
     ListIterator<T> operator++(const ListIterator<T> &self);  
 
-    // prefix
+    // prefix --
     ListIterator<T>& operator--();  
 
-    // postfix
+    // postfix --
     ListIterator<T> operator--(const ListIterator<T> &self); 
-    
+
     bool operator==(const ListIterator<T> &rhs);
     bool operator!=(const ListIterator<T> &rhs);
 };
@@ -59,9 +84,21 @@ public:
 private:
     Node<T>* head_;
     Node<T>* tail_;
+    Node<T>* pre_head_;
+    Node<T>* post_tail_;
     size_type size_;
 
 public:    
+         /**********************************
+            *
+            *   List Helper Functions
+            * 
+            ***********************************/
+    
+    friend void Node<T>::insert_node(const Node<T>& new_node);
+    
+    friend void Node<T>::delete_current_node();
+
             /**********************************
             *
             *   List Functions

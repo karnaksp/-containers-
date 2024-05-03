@@ -1,15 +1,18 @@
+CC= g++
+CFLAGS= -Wall -Werror -Wextra -std=c++17
+
 run:
-	@g++ myTests.cpp
-	@./a.out
+	@ $(CC) $(CFLAGS) myTests.cpp
+	@ ./a.out
 
 iterator:
-	@g++ tests_iterator.cpp
+	@ $(CC) $(CFLAGS) tests_iterator.cpp
 	@./a.out
 
 list:
-	@g++ main.cc s21_list.cc s21_list.h
+	@ $(CC) $(CFLAGS) main.cc s21_list.cc s21_list.h
 	@./a.out
 
 initialization_list:
-	@g++ tests_initialization_list.cpp
+	@ $(CC) $(CFLAGS) tests_initialization_list.cpp
 	@./a.out
