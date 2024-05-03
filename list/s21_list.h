@@ -26,10 +26,19 @@ private:
     Node<T>* current;
 public:
     value_type& operator*();
-    ListIterator<T>& operator++();  // prefix
-    ListIterator<T> operator++(const ListIterator<T> &self);  // postfix
-    ListIterator<T>& operator--();  // prefix
-    ListIterator<T> operator--(const ListIterator<T> &self); // postfix
+
+    // prefix
+    ListIterator<T>& operator++();  
+
+    // postfix
+    ListIterator<T> operator++(const ListIterator<T> &self);  
+
+    // prefix
+    ListIterator<T>& operator--();  
+
+    // postfix
+    ListIterator<T> operator--(const ListIterator<T> &self); 
+    
     bool operator==(const ListIterator<T> &rhs);
     bool operator!=(const ListIterator<T> &rhs);
 };
