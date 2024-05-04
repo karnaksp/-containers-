@@ -9,14 +9,31 @@ Node::Node()
         std::cout << "Node no-param constructor is working" << std::endl;
     }
 
-void Node::insert_node_after(int value){
-    std::cout << "insert_node_after is working" << std::endl;
+void Node::insert_node_before_curr(int value){
+    std::cout << "insert_node_before_curr is working" << std::endl;
     
     Node* tmp_new = new Node;
 
     tmp_new->value_ = value;
     
+    tmp_new->prev_ = this->prev_;
+    tmp_new->next_ = this;
+
+    if (this->prev_ == nullptr) {
+        this->prev_ = tmp_new;
+    } else {
+        this->prev_->next_ = tmp_new;
+        this->prev_ = tmp_new;
+
+    }
+}
+
+void Node::insert_node_after_curr(int value){
+    std::cout << "insert_node_after_curr is working" << std::endl;
     
+    Node* tmp_new = new Node;
+
+    tmp_new->value_ = value;
 
     tmp_new->prev_ = this;
     tmp_new->next_ = this->next_;
@@ -49,6 +66,36 @@ void Node::print_node(){
     std::cout << "Curr: " << this << std::endl;
     std::cout << "Prev: " << prev_ << std::endl;
     std::cout << "Next: " << next_ << std::endl;    
+}
+
+void Node::print_node_all(){
+    Node * first_element = this->find_first_node();
+    for (Node* curr = first_element; curr != nullptr; curr = curr->next_) {
+        int i = 0;
+        std::cout << "Node number " << i << std::endl;
+        curr->print_node();
+        i++;
+    }
+}
+
+Node* Node::find_first_node(){
+    Node* curr = this;
+    for (; curr != nullptr; curr = curr->next_){
+        if (curr->next_ == nullptr) {
+            break;
+        }
+    }
+    return curr;
+}
+
+Node* Node::find_last_node(){
+    Node* curr = this;
+    for (; curr != nullptr; curr = curr->prev_){
+        if (curr->prev_ == nullptr) {
+            break;
+        }
+    }
+    return curr;
 }
 
 void Node::delete_all_nodes_curr_and_forward(){
