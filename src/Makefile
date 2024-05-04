@@ -12,7 +12,7 @@ else
 endif
 DIR_TEST=./unit_tests
 DIR_SRC=./src
-CONTAINERS= set rb-tree # add folders
+CONTAINERS= rb-tree set map # add folders
 SRC_FILES := $(wildcard $(addsuffix /*.cc,$(DIR_SRC)))
 OBJ_FILES := $(patsubst %.cc,%.o,$(SRC_FILES))
 TEST_FILES := $(wildcard $(addsuffix /*.cc,$(DIR_TEST)))

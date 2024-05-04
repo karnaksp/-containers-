@@ -3,6 +3,7 @@
 
 #include <gtest/gtest.h>
 
+#include <map>
 #include <set>
 
 #include "../s21_containers.h"
