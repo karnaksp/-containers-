@@ -10,13 +10,17 @@ template<class T>
 class Node {
 public:
     T value_;
-    Node* next_;
-    Node* prev_;
+    Node<T>* next_;
+    Node<T>* prev_;
 
 public:
-    void insert_node(const Node<T> &new_node);
+    void insert_node_after(T value);
     
     void delete_current_node();
+
+    void print_node();
+
+    // ~Node();
 };
 
 template<class T>
