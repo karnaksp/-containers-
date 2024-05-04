@@ -6,21 +6,25 @@
 
 namespace s21 {
 
-template<class T>
+
 class Node {
 public:
-    T value_;
-    Node<T>* next_;
-    Node<T>* prev_;
+    int value_;
+    Node* next_;
+    Node* prev_;
 
 public:
-    void insert_node_after(T value);
+    Node();
+    
+    void insert_node_after(int value);
     
     void delete_current_node();
 
     void print_node();
 
     // ~Node();
+
+    void delete_all_nodes_curr_and_forward();
 };
 
 template<class T>
@@ -33,10 +37,10 @@ public:
     using size_type = size_t;
     
 private:
-    Node<T>* current;
+    Node* current;
 public:
     // constructor with address parametr
-    ListIterator(Node<T>* address);
+    ListIterator(Node* address);
 
     // Copy constructor
     ListIterator(const ListIterator &other);
@@ -86,10 +90,10 @@ public:
     using const_iterator = ListConstIterator<T>;
     using size_type = std::size_t;
 private:
-    Node<T>* head_;
-    Node<T>* tail_;
-    Node<T>* pre_head_;
-    Node<T>* post_tail_;
+    Node* head_;
+    Node* tail_;
+    Node* pre_head_;
+    Node* post_tail_;
     size_type size_;
 
 public:    
@@ -99,9 +103,9 @@ public:
             * 
             ***********************************/
     
-    friend void Node<T>::insert_node(const Node<T>& new_node);
+    friend void Node::insert_node(const Node& new_node);
     
-    friend void Node<T>::delete_current_node();
+    friend void Node::delete_current_node();
 
             /**********************************
             *
