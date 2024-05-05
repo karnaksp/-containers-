@@ -6,34 +6,44 @@ namespace s21 {
 template <class Key, class Type>
 class map {
  public:
-  using key_type = Key;
-  using mapped_type = Type;
-  using value_type = std::pair<const key_type, mapped_type>;
-  using reference = value_type &;
-  using const_reference = const value_type &;
+  using MapKey = Key;
+  using MapType = Type;
+  using MapValue = std::pair<const MapKey, MapType>;
+  using reference = MapValue &;
+  using const_reference = const MapValue &;
   using size_type = std::size_t;
 
   struct CompareLess {
-    bool operator()(const_reference key1, const_reference key2) const {
+    /**
+     * @brief Compares two key-value pairs by the keys.
+     *
+     * @param key1 The first key-value pair.
+     * @param key2 The second key-value pair.
+     *
+     * @return True if the first key is less than the second key, false
+     *         otherwise.
+     */
+    bool operator()(const std::pair<const Key, MapType> &key1,
+                    const std::pair<const Key, MapType> &key2) const {
       return (key1.first < key2.first);
     }
   };
 
-  using tree_type = s21::RBTree<value_type, CompareLess>;
-  using iterator = typename tree_type::iterator;
-  using const_iterator = typename tree_type::const_iterator;
+  using MapTree = s21::RBTree<MapValue, CompareLess>;
+  using iterator = typename MapTree::iterator;
+  using const_iterator = typename MapTree::const_iterator;
 
  public:
-  map() : RBTree(new tree_type{}){};
-  map(std::initializer_list<value_type> const &items);
-  map(const map &other) : RBTree(new tree_type(*other.RBTree)){};
-  map(map &&other) : RBTree(new tree_type(std::move(*other.RBTree))){};
+  map() : RBTree(new MapTree{}){};
+  map(std::initializer_list<MapValue> const &items);
+  map(const map &other) : RBTree(new MapTree(*other.RBTree)){};
+  map(map &&other) : RBTree(new MapTree(std::move(*other.RBTree))){};
   map &operator=(const map &other);
   map &operator=(map &&other);
   ~map() { delete RBTree; };
 
-  mapped_type &at(const key_type &key);
-  mapped_type &operator[](const key_type &key);
+  MapType &at(const MapKey &key);
+  MapType &operator[](const MapKey &key);
 
   iterator end() noexcept;
   const_iterator end() const noexcept;
@@ -46,11 +56,19 @@ class map {
 
   void clear();
 
-  std::pair<iterator, bool> insert(const value_type &value);
-  std::pair<iterator, bool> insert(const key_type &key, const mapped_type &obj);
+  std::pair<iterator, bool> insert(const MapValue &value);
+  std::pair<iterator, bool> insert(const MapKey &key, const MapType &obj);
+
+  std::pair<iterator, bool> insert_or_assign(const MapKey &key,
+                                             const MapType &obj);
+
+  void merge(map &other);
+  bool contains(const MapKey &key) const;
+  void erase(iterator pos);
+  void swap(map &other);
 
  private:
-  tree_type *RBTree;
+  MapTree *RBTree;
 };
 }  // namespace s21
 
