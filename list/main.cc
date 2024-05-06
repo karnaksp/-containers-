@@ -51,7 +51,22 @@ list.push_back(1);
 list.push_back(2);
 list.push_back(3);
 list.push_back(4);
-
+list.push_front(-10);
+list.print_all_valid_nodes();
+std::cout << "\nSize: " << list.size() << std::endl;
+list.pop_front();
+list.print_all_valid_nodes();
+list.pop_back();
+list.print_all_valid_nodes();
+std::cout << "\nSize: " << list.size() << std::endl;
+list.pop_back();
+list.pop_back();
+list.pop_back();
+list.pop_back();
+std::cout << "\nSize: " << list.size() << std::endl;
+list.push_front(101);
+list.push_back(999);
+list.print_all_valid_nodes();
 
 
 

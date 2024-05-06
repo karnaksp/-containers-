@@ -13,6 +13,24 @@ namespace s21{
     using const_iterator = ListConstIterator;
     using size_type = std::size_t;
 
+void List::print_all_valid_nodes() {
+    std::cout << "\n\tSize: " << this->size() << std::endl;
+    if (this->empty() == false) {
+        int count = 0;
+        for (Node* curr = this->head_; curr != nullptr; curr = curr->get_next()) {
+            if (curr == post_tail_) {
+                break;
+            }
+            std::cout << "\tList element: " << count << std::endl;
+            curr->print_node();
+            count++;
+        }
+    }
+}
+
+void List::print_all_nodes_with_hidden() {
+
+}
 
 List::List() {
     std::cout << "No-args List constructor is working" << std::endl;
@@ -65,14 +83,20 @@ const_reference List::back() {
 void List::push_back(const_reference value){
     this->post_tail_->insert_node_before_curr(value);
     this->tail_ = this->post_tail_->get_prev();
+    if(this->empty() == true) {
+        this->head_ = this->tail_;
+    }
     this->size_++;
 }
     
 
 void List::pop_back(){
-    this->tail_ = this->tail_->get_prev();
-    this->tail_->delete_current_node();
-    this->size_--;
+    if (this->empty() == false) {
+        auto tmp = this->tail_->get_prev();
+        this->tail_->delete_current_node();
+        this->tail_ = tmp;
+        this->size_--;
+    }
 }
     
 
@@ -83,9 +107,12 @@ void List::push_front(const_reference value){
 }
 
 void List::pop_front(){
-    this->head_ = this->head_->get_next();
-    this->head_->delete_current_node();
-    this->size_--;
+    if (this->empty() == false) {
+        auto tmp = this->head_->get_next();
+        this->head_->delete_current_node();
+        this->head_ = tmp;
+        this->size_--;
+    }
 }
 
 }
