@@ -3,6 +3,18 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "cstddef": "cpp",
-        "initializer_list": "cpp"
+        "initializer_list": "cpp",
+        "array": "cpp",
+        "atomic": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "iterator": "cpp",
+        "memory_resource": "cpp",
+        "string_view": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp"
     }
 }

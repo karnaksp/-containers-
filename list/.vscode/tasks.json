@@ -10,6 +10,10 @@
                 "${file}",
                 "s21_list.cc",
                 "s21_list.h",
+                "s21_iterator.cc",
+                "s21_iterator.h",
+                "s21_node.cc",
+                "s21_node.h",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

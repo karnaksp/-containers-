@@ -4,94 +4,18 @@
 #include <cstddef>
 #include <initializer_list>
 
+#include "s21_iterator.h"
+#include "s21_node.h"
+
 namespace s21 {
 
-
-class Node {
-public:
-    int value_;
-    Node* next_;
-    Node* prev_;
-
-public:
-    Node();
-    
-    void insert_node_before_curr(int value);
-    void insert_node_after_curr(int value);
-    
-    void delete_current_node();
-
-    void print_node();
-    void print_node_all();
-    Node* find_first_node();
-    Node* find_last_node();
-
-    // ~Node();
-
-    void delete_all_nodes_curr_and_forward();
-};
-
-template<class T>
-class ListIterator {
-public:
-    using value_type = T;
-    using reference = T&;
-    using const_reference = const T&;
-    using iterator = ListIterator<T>;
-    using size_type = size_t;
-    
-private:
-    Node* current;
-public:
-    // constructor with address parametr
-    ListIterator(Node* address);
-
-    // Copy constructor
-    ListIterator(const ListIterator &other);
-
-    // Move constructor
-    ListIterator(ListIterator &&other);
-
-    // Destructor
-    ~ListIterator();
-
-    // Copy assignment operator(=).
-    ListIterator& operator=(const ListIterator &rhs);
-
-    // Move assignment operator(=).
-    ListIterator& operator=(ListIterator && rhs);
-
-    
-    value_type& operator*();
-
-    // prefix ++
-    ListIterator<T>& operator++();  
-
-    // postfix ++
-    ListIterator<T> operator++(const ListIterator<T> &self);  
-
-    // prefix --
-    ListIterator<T>& operator--();  
-
-    // postfix --
-    ListIterator<T> operator--(const ListIterator<T> &self); 
-
-    bool operator==(const ListIterator<T> &rhs);
-    bool operator!=(const ListIterator<T> &rhs);
-};
-
-template<class T>
-class ListConstIterator {
-};
-
-template<class T>
 class list {
 public:
-    using value_type = T;
-    using reference = T&;
-    using const_reference = const T&;
-    using iterator = ListIterator<T>;
-    using const_iterator = ListConstIterator<T>;
+    using value_type = int;
+    using reference = value_type&;
+    using const_reference = const value_type&;
+    using iterator = ListIterator;
+    using const_iterator = ListConstIterator;
     using size_type = std::size_t;
 private:
     Node* head_;
@@ -107,7 +31,7 @@ public:
             * 
             ***********************************/
     
-    friend void Node::insert_node(const Node& new_node);
+    friend void Node::insert_node_before_curr(int value);
     
     friend void Node::delete_current_node();
 
@@ -127,7 +51,7 @@ public:
     initializer list constructor, 
     creates a list initizialized using std::initializer_list
     */
-    list(std::initializer_list<T> const &items);
+    list(std::initializer_list<value_type> const &items);
 
     // copy constructor
     list(const list &l);

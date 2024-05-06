@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "s21_list.h"
+#include "s21_node.h"
 
 int main() {
 
@@ -25,12 +26,21 @@ int main() {
     *   insert_node_before_curr
     */
 
+
+/*
+*
+*   Test of inserts, print all and delete all
+*  
+*/
    s21::Node* new_ptr = new s21::Node;
    new_ptr->insert_node_before_curr(12);
-
+   new_ptr->insert_node_after_curr(16);
+   new_ptr->insert_node_after_curr(17);
+   new_ptr->insert_node_after_curr(18);
    new_ptr->print_node_all();
+   new_ptr->delete_all_nodes();
    
-   new_ptr->prev_->delete_all_nodes_curr_and_forward();
+
 
 
 
