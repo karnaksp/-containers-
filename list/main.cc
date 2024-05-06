@@ -32,15 +32,25 @@ int main() {
 *   Test of inserts, print all and delete all
 *  
 */
-   s21::Node* new_ptr = new s21::Node;
-   new_ptr->insert_node_before_curr(12);
-   new_ptr->insert_node_after_curr(16);
-   new_ptr->insert_node_after_curr(17);
-   new_ptr->insert_node_after_curr(18);
-   new_ptr->print_node_all();
-   new_ptr->delete_all_nodes();
+//    s21::Node* new_ptr = new s21::Node;
+//    new_ptr->insert_node_before_curr(12);
+//    new_ptr->insert_node_after_curr(16);
+//    new_ptr->insert_node_after_curr(17);
+//    new_ptr->insert_node_after_curr(18);
+//    new_ptr->print_node_all();
+//    new_ptr->delete_all_nodes();
    
+/*
+*
+*   List push and pop
+*
+*/
 
+s21::List list;
+list.push_back(1);
+list.push_back(2);
+list.push_back(3);
+list.push_back(4);
 
 
 

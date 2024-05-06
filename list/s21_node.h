@@ -3,7 +3,7 @@
 
 namespace s21{
     class Node {
-public:
+private:
     int value_;
     Node* next_;
     Node* prev_;
@@ -25,6 +25,18 @@ public:
 
     void delete_all_nodes_curr_and_forward();
     void delete_all_nodes();
+
+    // getters
+
+    int& get_value();
+    Node* get_prev();
+    Node* get_next();
+
+    // setters
+
+    void set_value(int value);
+    void set_prev(Node* new_prev);
+    void set_next(Node* new_next);
 };
 }
 

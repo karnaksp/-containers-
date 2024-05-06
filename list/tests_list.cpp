@@ -249,5 +249,11 @@ auto it2 = std::find(list_3.begin(), list_3.end(), 3);
 list_3.insert(it2, 10);  // 1 2 10 3 4 5
 list_3.erase(it2);       // erases the 3, 1 2 10 4 5
 print_list(list_3);
+
+std::cout << "\n\tPractice with List front and back" << std::endl;
+std::list<char> list4;
+auto m = list4.front();
+std::cout << "Size: " << list4.size() << " . Value: " << m << std::endl; 
+
     return 0;
 }

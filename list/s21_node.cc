@@ -120,4 +120,28 @@ void Node::delete_all_nodes(){
 // }
 
 
+    // getters
+
+    int& Node::get_value() {
+        return this->value_;
+    }
+    Node* Node::get_prev() {
+        return this->prev_;
+    }
+    Node* Node::get_next(){
+        return this->next_;
+    }
+
+    // setters
+
+    void Node::set_value(int value) {
+        this->value_ = value;
+    }
+    void Node::set_prev(Node* new_prev) {
+        this->prev_ = new_prev;
+    }
+    void Node::set_next(Node* new_next) {
+        this->next_ = new_next;
+    }
+
 }

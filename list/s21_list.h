@@ -9,7 +9,7 @@
 
 namespace s21 {
 
-class list {
+class List {
 public:
     using value_type = int;
     using reference = value_type&;
@@ -35,6 +35,9 @@ public:
     
     friend void Node::delete_current_node();
 
+    void print_all_valid_nodes();
+    void print_all_nodes_with_hidden();
+
             /**********************************
             *
             *   List Functions
@@ -42,28 +45,28 @@ public:
             ***********************************/ 
 
     // default constructor, creates an empty list
-    list();
+    List();
 
     // parameterized constructor, creates the list of size n
-    list(size_type n);
+    List(size_type n);
 
     /*
     initializer list constructor, 
     creates a list initizialized using std::initializer_list
     */
-    list(std::initializer_list<value_type> const &items);
+    List(std::initializer_list<value_type> const &items);
 
     // copy constructor
-    list(const list &l);
+    List(const List &l);
 
     // move constructor
-    list(list &&l);
+    List(List &&l);
 
     // destructor
-    ~list();
+    ~List();
 
     // assignment operator overload for moving an object
-    list operator=(list &&l);
+    List operator=(List &&l);
 
             /**********************************
             *
@@ -135,13 +138,13 @@ public:
     void pop_front();
     
     // swaps the contents
-    void swap(list& other);
+    void swap(List& other);
     
     // merges two sorted lists
-    void merge(list& other);
+    void merge(List& other);
     
     // transfers elements from list other starting from pos
-    void splice(const_iterator pos, list& other);
+    void splice(const_iterator pos, List& other);
     
     // reverses the order of the elements
     void reverse();

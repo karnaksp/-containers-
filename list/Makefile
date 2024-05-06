@@ -7,7 +7,7 @@ MAIN_FILE= main.cc
 BINARY=main
 
 run_test_with_not_my_list:
-	@ $(CC) $(CFLAGS) myTests.cpp
+	@ $(CC) $(CFLAGS) tests_list.cpp
 	@ ./a.out
 
 run_test_with_not_my_iterator:
