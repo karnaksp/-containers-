@@ -13,6 +13,12 @@ namespace s21{
     using const_iterator = ListConstIterator;
     using size_type = std::size_t;
 
+         /**********************************
+            *
+            *   List Helper Functions
+            * 
+            ***********************************/
+
 void List::print_all_valid_nodes() {
     std::cout << "\n\tSize: " << this->size() << std::endl;
     if (this->empty() == false) {
@@ -29,8 +35,20 @@ void List::print_all_valid_nodes() {
 }
 
 void List::print_all_nodes_with_hidden() {
+    std::cout << "\n\tpre_head_: " << std::endl;
+    this->pre_head_->print_node();
+    this->print_all_valid_nodes();
+    std::cout << "\n\tpost_tail_: " << this->post_tail_ << std::endl;
+    this->post_tail_->print_node();
 
 }
+
+            /**********************************
+            *
+            *   List Functions
+            * 
+            ***********************************/ 
+
 
 List::List() {
     std::cout << "No-args List constructor is working" << std::endl;
@@ -55,6 +73,13 @@ List::~List(){
     this->pre_head_->delete_all_nodes();
 }
 
+            /**********************************
+            *
+            *   List Element access
+            * 
+            ***********************************/ 
+
+
 const_reference List::front() {
     if (size_ != 0) {
         return head_->get_value();
@@ -71,14 +96,55 @@ const_reference List::back() {
     }
 }
 
-    bool List::empty(){
-        return (this->size_ == 0) ? true : false;
+ 
+            /**********************************
+            *
+            *   List Iterators
+            * 
+            ***********************************/ 
+    iterator List::begin() {
+        return iterator::iterator(this->head_);
     }
 
-
-    size_type List::size(){
-        return this->size_;
+    iterator List::end() {
+        return iterator::iterator(this->post_tail_);
     }
+
+            /**********************************
+            *
+            *   List Capacity
+            * 
+            ***********************************/ 
+
+
+bool List::empty(){
+    return (this->size_ == 0) ? true : false;
+}
+
+
+size_type List::size(){
+    return this->size_;
+}
+
+            /**********************************
+            *
+            *   List Modifiers
+            * 
+            ***********************************/ 
+
+void List::clear() {
+     auto curr = this->head_;
+     for(; curr != nullptr;) {
+        if (curr == post_tail_) {
+            break;
+        }
+        auto tmp = curr->get_next();
+        curr->delete_current_node();
+        curr = tmp;
+     }
+     this->size_ = 0;
+}
+
 
 void List::push_back(const_reference value){
     this->post_tail_->insert_node_before_curr(value);

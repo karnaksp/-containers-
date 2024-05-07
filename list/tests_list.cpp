@@ -255,5 +255,51 @@ std::list<char> list4;
 auto m = list4.front();
 std::cout << "Size: " << list4.size() << " . Value: " << m << std::endl; 
 
-    return 0;
+std::cout << "\n\tPractice with List iterators++" << std::endl;
+std::list<int> list5 {1,2,3,4};
+auto it5 = list5.begin();
+
+std::cout << "++: " << *it5 << std::endl;
+
+it5++;
+std::cout << "++: " << *it5 << std::endl;
+it5++;
+std::cout << "++: " << *it5 << std::endl;
+it5++;
+std::cout << "++: " << *it5 << std::endl;
+it5++;
+std::cout << "++: " << *it5 << std::endl;
+it5++;
+std::cout << "++: " << *it5 << std::endl;
+it5++;
+std::cout << "++: " << *it5 << std::endl;
+it5++;
+std::cout << "++: " << *it5 << std::endl;
+
+auto it5_pre = list5.begin();
+
+
+auto list5_end = list5.end();
+it5_pre--;
+if (list5_end != it5_pre) {
+    std::cout << "--: " << *it5_pre << std::endl;
+}
+it5_pre--;
+if (list5_end != it5_pre) {
+    std::cout << "--: " << *it5_pre << std::endl;
+}
+it5_pre--;
+if (list5_end != it5_pre) {
+    std::cout << "--: " << *it5_pre << std::endl;
+}
+it5_pre--;
+if (list5_end != it5_pre) {
+    std::cout << "--: " << *it5_pre << std::endl;
+}
+it5_pre--;
+if (list5_end != it5_pre) {
+    std::cout << "--: " << *it5_pre << std::endl;
+}
+
+return 0;
 }

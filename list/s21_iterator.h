@@ -27,7 +27,7 @@ public:
     ListIterator(ListIterator &&other);
 
     // Destructor
-    ~ListIterator();
+    ~ListIterator(){}
 
     // Copy assignment operator(=).
     ListIterator& operator=(const ListIterator &rhs);
@@ -42,13 +42,13 @@ public:
     ListIterator& operator++();  
 
     // postfix ++
-    ListIterator operator++(int number);  
+    ListIterator operator++(int);  
 
     // prefix --
     ListIterator& operator--();  
 
     // postfix --
-    ListIterator operator--(int number); 
+    ListIterator operator--(int); 
 
     bool operator==(const ListIterator &rhs);
     bool operator!=(const ListIterator &rhs);
@@ -57,6 +57,7 @@ public:
 
 class ListConstIterator {
 };
+
 }
 
 #endif

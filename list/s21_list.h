@@ -31,9 +31,9 @@ public:
             * 
             ***********************************/
     
-    friend void Node::insert_node_before_curr(int value);
+//     friend void Node::insert_node_before_curr(int value);
     
-    friend void Node::delete_current_node();
+//     friend void Node::delete_current_node();
 
     void print_all_valid_nodes();
     void print_all_nodes_with_hidden();
