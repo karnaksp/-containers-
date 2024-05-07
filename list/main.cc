@@ -1,5 +1,6 @@
 #include <iostream>
 
+
 #include "s21_list.h"
 #include "s21_node.h"
 
@@ -241,6 +242,33 @@ int main() {
 // it_6--;
 // std::cout << "++: " << *it_6 << std::endl;
 
+/*
+*
+*   List constuctor size_t
+*
+*/
+
+// s21::List list_7 = s21::List(0);
+// list_7.print_all_valid_nodes();
+
+
+/*
+*
+*   List constuctor initializer
+*
+*/
+
+// s21::List list_8 {1,2,3,4,5,6,7,8,9, 10};
+// list_8.print_all_valid_nodes();
+
+// s21::List list_empty {};
+// list_empty.print_all_valid_nodes();
+
+// s21::List list_copy (list_8);
+// list_copy.print_all_valid_nodes();
+
+s21::List list_move (s21::List {-1,0,1,2,3});
+list_move.print_all_valid_nodes();
 
 return 0;
 }

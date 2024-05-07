@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <initializer_list>
+
 #include "s21_list.h"
 #include "s21_node.h"
 #include "s21_iterator.h"
@@ -65,6 +67,41 @@ List::List() {
 
     pre_head_->set_next(post_tail_);
     post_tail_->set_prev(pre_head_);
+
+}
+
+List::List(size_type n) : List()  {
+    for (size_type i = 0; i < n; i++) {
+        this->push_back(0);
+    }
+}
+
+List::List(std::initializer_list<value_type> const &items)
+    : List() {
+        for (auto it = items.begin(); it != items.end(); it++) {
+            this->push_back(*it);
+        }
+}
+
+List::List(const List &l) : List(){
+    if (l.size_ != 0) {
+        for (auto it = l.head_; it != l.post_tail_; it = it->get_next()) {
+            this->push_back(it->get_value());
+        }
+    }
+}
+
+List::List(List &&l) : List() {
+    this->head_ = l.head_;
+    this->tail_ = l.tail_;
+    this->pre_head_ = l.pre_head_;
+    this->post_tail_ = l.post_tail_;
+    this->size_ = l.size_;
+    l.head_ = nullptr;
+    l.tail_ = nullptr;
+    l.pre_head_ = nullptr;
+    l.post_tail_ = nullptr;
+    l.size_ = 0;
 
 }
 
