@@ -61,13 +61,26 @@ namespace s21 {
 
     // prefix --
     ListIterator& ListIterator::operator--() {
+        if (this->current->get_prev()->get_prev() != nullptr) {
+            this->current = this->current->get_prev();
+        } else {
+            auto curr = this->current;
+            for (; curr->get_next() != nullptr; curr = curr->get_next()) {}
+            this->current = curr;
+        }
         return *this;
     }  
 
     // postfix --
     ListIterator ListIterator::operator--(int) {
         auto tmp = ListIterator(this->current);
-        
+        if (this->current->get_prev()->get_prev() != nullptr) {
+            this->current = this->current->get_prev();
+        } else {
+            auto curr = this->current;
+            for (; curr->get_next() != nullptr; curr = curr->get_next()) {}
+            this->current = curr;
+        }
         return tmp;
     } 
 
