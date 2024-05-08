@@ -416,6 +416,60 @@ void List<T>::pop_front(){
     }
 }
 
+
+// swaps the contents
+template <typename T>
+void List<T>::swap(List<T>& other){
+        auto tmp_head_ = this->head_;
+        auto tmp_tail_ = this->tail_;
+        auto tmp_pre_head_ = this->pre_head_;
+        auto tmp_post_tail_ = this->post_tail_;
+        auto tmp_size_ = this->size_;
+
+        this->head_ = other.head_;
+        this->tail_ = other.tail_;
+        this->pre_head_ = other.pre_head_;
+        this->post_tail_ = other.post_tail_;
+        this->size_ = other.size_;
+
+        other.head_ = tmp_head_;
+        other.tail_ = tmp_tail_;
+        other.pre_head_ = tmp_pre_head_;
+        other.post_tail_ = tmp_post_tail_;
+        other.size_ = tmp_size_;
+}
+    
+// merges two sorted lists
+template <typename T>
+void List<T>::merge(List<T>& other){
+
+}
+    
+// transfers elements from list other starting from pos
+template <typename T>
+void List<T>::splice(ListConstIterator<T> pos, List<T>& other){
+
+}
+    
+// reverses the order of the elements
+template <typename T>
+void List<T>::reverse(){
+
+}
+    
+// removes consecutive duplicate elements
+template <typename T>
+void List<T>::unique(){
+        
+}
+    
+// sorts the elements
+template <typename T>
+void List<T>::sort(){
+
+}
+
+
 }
 
 #endif
