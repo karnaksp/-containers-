@@ -4,6 +4,9 @@
 #include "s21_list.h"
 #include "s21_node.h"
 
+#include "s21_list.cc"
+#include "s21_node.cc"
+
 int main() {
 
     /*
@@ -267,7 +270,7 @@ int main() {
 // s21::List list_copy (list_8);
 // list_copy.print_all_valid_nodes();
 
-s21::List list_move (s21::List {-1,0,1,2,3});
+s21::List<int> list_move (s21::List<int> {-1,0,1,2,3});
 list_move.print_all_valid_nodes();
 
 return 0;

@@ -6,19 +6,21 @@
 #include "s21_node.h"
 
 namespace s21 {
-    class ListIterator {
+
+template <typename T>
+class ListIterator {
 public:
-    using value_type = int;
+    using value_type = T;
     using reference = value_type&;
     using const_reference = const value_type&;
     using iterator = ListIterator;
     using size_type = std::size_t;
     
 private:
-    Node* current;
+    Node<T>* current;
 public:
     // constructor with address parametr
-    ListIterator(Node* address);
+    ListIterator(Node<T>* address);
 
     // Copy constructor
     ListIterator(const ListIterator &other);
@@ -54,7 +56,7 @@ public:
     bool operator!=(const ListIterator &rhs);
 };
 
-
+template <typename T>
 class ListConstIterator {
 };
 

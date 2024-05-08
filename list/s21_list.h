@@ -9,19 +9,20 @@
 
 namespace s21 {
 
+template <typename T>
 class List {
 public:
-    using value_type = int;
-    using reference = value_type&;
-    using const_reference = const value_type&;
-    using iterator = ListIterator;
-    using const_iterator = ListConstIterator;
+//     using value_type = int;
+//     using reference = value_type&;
+//     using const_reference = const value_type&;
+//     using iterator = ListIterator;
+//     using const_iterator = ListConstIterator;
     using size_type = std::size_t;
 private:
-    Node* head_;
-    Node* tail_;
-    Node* pre_head_;
-    Node* post_tail_;
+    Node<T>* head_;
+    Node<T>* tail_;
+    Node<T>* pre_head_;
+    Node<T>* post_tail_;
     size_type size_;
 
 public:    
@@ -54,19 +55,19 @@ public:
     initializer list constructor, 
     creates a list initizialized using std::initializer_list
     */
-    List(std::initializer_list<value_type> const &items);
+    List(std::initializer_list<T> const &items);
 
     // copy constructor
-    List(const List &l);
+    List(const List<T> &l);
 
     // move constructor
-    List(List &&l);
+    List(List<T> &&l);
 
     // destructor
     ~List();
 
     // assignment operator overload for moving an object
-    List operator=(List &&l);
+    List operator=(List<T> &&l);
 
             /**********************************
             *
@@ -75,10 +76,10 @@ public:
             ***********************************/ 
 
     // access the first element
-    const_reference front();
+    const T& front();
 
     // access the last element
-    const_reference back();
+    const T& back();
  
             /**********************************
             *
@@ -87,10 +88,10 @@ public:
             ***********************************/ 
 
     // returns an iterator to the beginning
-    iterator begin();
+    ListIterator<T> begin();
 
     // returns an iterator to the end
-    iterator end(); 
+    ListIterator<T> end(); 
  
             /**********************************
             *
@@ -120,31 +121,31 @@ public:
     inserts element into concrete pos and 
     returns the iterator that points to the new element
     */
-    iterator insert(iterator pos, const_reference value);
+    ListIterator<T> insert(ListIterator<T> pos, const T& value);
     
     // erases an element at pos
-    void erase(iterator pos);
+    void erase(ListIterator<T> pos);
     
     // adds an element to the end
-    void push_back(const_reference value);
+    void push_back(const T& value);
     
     // removes the last element
     void pop_back();
     
     // adds an element to the head
-    void push_front(const_reference value);
+    void push_front(const T& value);
     
     // removes the first element
     void pop_front();
     
     // swaps the contents
-    void swap(List& other);
+    void swap(List<T>& other);
     
     // merges two sorted lists
-    void merge(List& other);
+    void merge(List<T>& other);
     
     // transfers elements from list other starting from pos
-    void splice(const_iterator pos, List& other);
+    void splice(ListConstIterator<T> pos, List<T>& other);
     
     // reverses the order of the elements
     void reverse();

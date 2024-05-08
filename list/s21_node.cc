@@ -5,15 +5,17 @@
 
 namespace s21{
 
-Node::Node() 
-    :value_ {0},  next_ {nullptr}, prev_ {nullptr}  {
+template <typename T>
+Node<T>::Node() 
+    :value_ {},  next_ {nullptr}, prev_ {nullptr}  {
         std::cout << "Node no-param constructor is working" << std::endl;
     }
 
-void Node::insert_node_before_curr(int value){
+template <typename T>
+void Node<T>::insert_node_before_curr(T value){
     std::cout << "insert_node_before_curr is working" << std::endl;
     
-    Node* tmp_new = new Node;
+    Node<T>* tmp_new = new Node<T>;
 
     tmp_new->value_ = value;
     
@@ -25,14 +27,14 @@ void Node::insert_node_before_curr(int value){
     } else {
         this->prev_->next_ = tmp_new;
         this->prev_ = tmp_new;
-
     }
 }
 
-void Node::insert_node_after_curr(int value){
+template <typename T>
+void Node<T>::insert_node_after_curr(T value){
     std::cout << "insert_node_after_curr is working" << std::endl;
-    
-    Node* tmp_new = new Node;
+
+    Node<T>* tmp_new = new Node<T>;
 
     tmp_new->value_ = value;
 
@@ -44,12 +46,11 @@ void Node::insert_node_after_curr(int value){
     } else {
         this->next_->prev_ = tmp_new;
         this->next_ = tmp_new;
-
     }
 }
 
-
-void Node::delete_current_node(){
+template <typename T>
+void Node<T>::delete_current_node(){
     if (prev_ != nullptr) {
         prev_->next_ = next_;
     }
@@ -60,8 +61,8 @@ void Node::delete_current_node(){
     delete this;
 }
 
-
-void Node::print_node(){
+template <typename T>
+void Node<T>::print_node(){
     std::cout << "\tPrint Node" << std::endl;
     std::cout << "Value: " << value_ << std::endl;
     std::cout << "Curr: " << this << std::endl;
@@ -69,18 +70,20 @@ void Node::print_node(){
     std::cout << "Next: " << next_ << std::endl;    
 }
 
-void Node::print_node_all(){
-    Node * first_element = this->find_first_node();
+template <typename T>
+void Node<T>::print_node_all(){
+    Node<T>* first_element = this->find_first_node();
 
     int i = 0;
-    for (Node* curr = first_element; curr != nullptr; curr = curr->next_) {
+    for (Node<T>* curr = first_element; curr != nullptr; curr = curr->next_) {
         std::cout << "\nNode number " << i << std::endl;
         curr->print_node();
         i++;
     }
 }
 
-Node* Node::find_first_node(){
+template <typename T>
+Node<T>* Node<T>::find_first_node(){
     Node* curr = this;
     for (; curr != nullptr; curr = curr->prev_){
         if (curr->prev_ == nullptr) {
@@ -90,8 +93,9 @@ Node* Node::find_first_node(){
     return curr;
 }
 
-Node* Node::find_last_node(){
-    Node* curr = this;
+template <typename T>
+Node<T>* Node<T>::find_last_node(){
+    Node<T>* curr = this;
     for (; curr != nullptr; curr = curr->next_){
         if (curr->next_ == nullptr) {
             break;
@@ -100,16 +104,18 @@ Node* Node::find_last_node(){
     return curr;
 }
 
-void Node::delete_all_nodes_curr_and_forward(){
-    for (Node* curr = this; curr != nullptr;) {
-        Node* tmp = curr->next_;
+template <typename T>
+void Node<T>::delete_all_nodes_curr_and_forward(){
+    for (Node<T>* curr = this; curr != nullptr;) {
+        Node<T>* tmp = curr->next_;
         delete curr;
         curr = tmp;
     }
 }
 
-void Node::delete_all_nodes(){
-    Node * first_element = this->find_first_node();
+template <typename T>
+void Node<T>::delete_all_nodes(){
+    Node<T> * first_element = this->find_first_node();
     first_element->delete_all_nodes_curr_and_forward();
 }
 
@@ -121,26 +127,35 @@ void Node::delete_all_nodes(){
 
 
     // getters
-
-    int& Node::get_value() {
+    template <typename T>
+    T& Node<T>::get_value() {
         return this->value_;
     }
-    Node* Node::get_prev() {
+
+    template <typename T>
+    Node<T>* Node<T>::get_prev() {
         return this->prev_;
     }
-    Node* Node::get_next(){
+
+    template <typename T>
+    Node<T>* Node<T>::get_next(){
         return this->next_;
     }
 
     // setters
 
-    void Node::set_value(int value) {
+    template <typename T>
+    void Node<T>::set_value(T value) {
         this->value_ = value;
     }
-    void Node::set_prev(Node* new_prev) {
+
+    template <typename T>
+    void Node<T>::set_prev(Node<T>* new_prev) {
         this->prev_ = new_prev;
     }
-    void Node::set_next(Node* new_next) {
+
+    template <typename T>
+    void Node<T>::set_next(Node<T>* new_next) {
         this->next_ = new_next;
     }
 
