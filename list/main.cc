@@ -4,8 +4,8 @@
 #include "s21_list.h"
 #include "s21_node.h"
 
-#include "s21_list.cc"
-#include "s21_node.cc"
+// #include "s21_list.cc"
+// #include "s21_node.cc"
 
 int main() {
 

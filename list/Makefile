@@ -15,7 +15,7 @@ run_test_with_not_my_iterator:
 	@./a.out
 
 list: clean
-	@ $(CC) $(CFLAGS) $(DEBUG_OPTIONS) $(SOURCE_FILES) $(HEADER_FILES) $(MAIN_FILE) -o $(BINARY)
+	@ $(CC) $(CFLAGS) $(DEBUG_OPTIONS) $(HEADER_FILES) $(MAIN_FILE) -o $(BINARY)
 	@./main
 
 run_test_with_not_my_initialization_list:
