@@ -47,12 +47,12 @@ public:
 template <typename T>
 Node<T>::Node() 
     :value_ {},  next_ {nullptr}, prev_ {nullptr}  {
-        std::cout << "Node no-param constructor is working" << std::endl;
+        // std::cout << "Node no-param constructor is working" << std::endl;
     }
 
 template <typename T>
 void Node<T>::insert_node_before_curr(T value){
-    std::cout << "insert_node_before_curr is working" << std::endl;
+    // std::cout << "insert_node_before_curr is working" << std::endl;
     
     Node<T>* tmp_new = new Node<T>;
 
@@ -71,7 +71,7 @@ void Node<T>::insert_node_before_curr(T value){
 
 template <typename T>
 void Node<T>::insert_node_after_curr(T value){
-    std::cout << "insert_node_after_curr is working" << std::endl;
+    // std::cout << "insert_node_after_curr is working" << std::endl;
 
     Node<T>* tmp_new = new Node<T>;
 

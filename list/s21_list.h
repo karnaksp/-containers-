@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include <initializer_list>
+#include <limits>
 
 #include "s21_iterator.h"
 #include "s21_node.h"
@@ -14,11 +15,7 @@ using size_type = std::size_t;
 template <typename T>
 class List {
 public:
-//     using value_type = int;
-//     using reference = value_type&;
-//     using const_reference = const value_type&;
-//     using iterator = ListIterator;
-//     using const_iterator = ListConstIterator;
+
     using size_type = std::size_t;
 private:
     Node<T>* head_;
@@ -69,7 +66,7 @@ public:
     ~List();
 
     // assignment operator overload for moving an object
-    List operator=(List<T> &&l);
+    List<T> operator=(List<T> &&l);
 
             /**********************************
             *
@@ -200,7 +197,7 @@ void List<T>::print_all_nodes_with_hidden() {
 
 template <typename T>
 List<T>::List() {
-    std::cout << "No-args List constructor is working" << std::endl;
+//     std::cout << "No-args List constructor is working" << std::endl;
     
     size_ = 0;
     head_ = nullptr;
@@ -260,6 +257,22 @@ List<T>::~List(){
     this->pre_head_->delete_all_nodes();
 }
 
+template <typename T>
+List<T> List<T>::operator=(List<T> &&l) {
+    this->head_ = l.head_;
+    this->tail_ = l.tail_;
+    this->pre_head_ = l.pre_head_;
+    this->post_tail_ = l.post_tail_;
+    this->size_ = l.size_;
+    l.head_ = nullptr;
+    l.tail_ = nullptr;
+    l.pre_head_ = nullptr;
+    l.post_tail_ = nullptr;
+    l.size_ = 0;
+
+    return *this;
+}
+
             /**********************************
             *
             *   List Element access
@@ -292,12 +305,12 @@ const T& List<T>::back() {
             ***********************************/ 
     template <typename T>
     ListIterator<T> List<T>::begin() {
-        return ListIterator<T>::iterator(this->head_);
+        return typename s21::ListIterator<T>::ListIterator(this->head_);
     }
 
     template <typename T>
     ListIterator<T> List<T>::end() {
-        return ListIterator<T>::iterator(this->post_tail_);
+        return typename s21::ListIterator<T>::ListIterator(this->post_tail_);
     }
 
             /**********************************
@@ -314,6 +327,12 @@ bool List<T>::empty(){
 template <typename T>
 size_type List<T>::size(){
     return this->size_;
+}
+
+template <typename T>
+size_type List<T>::max_size() {
+        auto minus_list = std::numeric_limits<std::size_t>::max() - sizeof(List<T>);
+        return  minus_list /  sizeof(Node<T>) ;
 }
 
             /**********************************
@@ -334,6 +353,18 @@ void List<T>::clear() {
         curr = tmp;
      }
      this->size_ = 0;
+}
+
+template <typename T>
+ListIterator<T> List<T>::insert(ListIterator<T> pos, const T& value){
+        auto pos_tmp = pos;
+        auto ref = pos.current;
+        ref->insert_node_before_curr(value);
+        this->size_++;
+        if (ref == this->head_) {
+                this->head_ = this->head_->get_prev();
+        }
+        return ListIterator(pos.current->get_next());
 }
 
 template <typename T>

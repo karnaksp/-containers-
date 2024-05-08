@@ -12,13 +12,13 @@ using size_type = std::size_t;
 template <typename T>
 class ListIterator {
 public:
-    using value_type = T;
-    using reference = value_type&;
-    using const_reference = const value_type&;
-    using iterator = ListIterator;
+    // using value_type = T;
+    // using reference = value_type&;
+    // using const_reference = const value_type&;
+    // using iterator = ListIterator;
     using size_type = std::size_t;
     
-private:
+public:
     Node<T>* current;
 public:
     // constructor with address parametr
@@ -40,7 +40,7 @@ public:
     ListIterator& operator=(ListIterator && rhs);
 
     
-    value_type& operator*();
+    T& operator*();
 
     // prefix ++
     ListIterator& operator++();  

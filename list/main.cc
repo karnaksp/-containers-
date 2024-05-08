@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include <list>
 
 #include "s21_list.h"
 #include "s21_node.h"
@@ -270,8 +271,58 @@ int main() {
 // s21::List list_copy (list_8);
 // list_copy.print_all_valid_nodes();
 
-s21::List<int> list_move (s21::List<int> {-1,0,1,2,3});
-list_move.print_all_valid_nodes();
+// s21::List<int> list_move (s21::List<int> {-1,0,1,2,3});
+// std::list<int> list_std (std::list<int> {-1,0,1,2,3});
+// std::list<int> list_std1 (std::list<int> {-1});
+// // list_move.print_all_valid_nodes();
+// std::cout << list_move.max_size() << std::endl;
+// std::cout << list_std.max_size() << std::endl;
+// std::cout << list_std1.max_size() << std::endl;
+
+/*
+*
+*   List insert
+*
+*/
+
+std::list<int> list_insert (std::list<int> {0,1,2,3,4,5});
+
+std::cout << "std: ";
+for (auto it = list_insert.begin(); it != list_insert.end(); it++) {
+    std::cout << *it << " ";
+}
+std::cout << std::endl;
+
+auto it1 = list_insert.begin();
+it1++;
+list_insert.insert(it1, 10);
+
+std::cout << "std: ";
+for (auto it = list_insert.begin(); it != list_insert.end(); it++) {
+    std::cout << *it << " ";
+}
+std::cout << std::endl;
+
+s21::List<int> my_list_insert {0,1,2,3,4,5};
+std::cout << "my : ";
+for (auto it = my_list_insert.begin(); it != my_list_insert.end(); it++) {
+    std::cout << *it << " ";
+}
+std::cout << std::endl;
+
+auto my_it = my_list_insert.begin();
+my_it++;
+my_list_insert.insert(my_it, 10);
+
+std::cout << "my : ";
+for (auto it = my_list_insert.begin(); it != my_list_insert.end(); it++) {
+    std::cout << *it << " ";
+}
+std::cout << std::endl;
+
+
+
+
 
 return 0;
 }
