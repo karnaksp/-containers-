@@ -368,6 +368,18 @@ ListIterator<T> List<T>::insert(ListIterator<T> pos, const T& value){
 }
 
 template <typename T>
+void List<T>::erase(ListIterator<T> pos){
+        auto pos_tmp = pos;
+        auto ref = pos.current;
+        auto tmp = this->head_->get_next();
+        ref->delete_current_node();
+        if (ref == this->head_) {
+                this->head_ = tmp;
+        }
+        this->size_--;
+}
+
+template <typename T>
 void List<T>::push_back(const T& value){
     this->post_tail_->insert_node_before_curr(value);
     this->tail_ = this->post_tail_->get_prev();

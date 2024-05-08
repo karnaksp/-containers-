@@ -285,6 +285,60 @@ int main() {
 *
 */
 
+/*
+*   Not My
+*/ 
+
+// std::list<int> list_insert (std::list<int> {0,1,2,3,4,5});
+
+// std::cout << "std: ";
+// for (auto it = list_insert.begin(); it != list_insert.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// auto it1 = list_insert.begin();
+// it1++;
+// list_insert.insert(it1, 10);
+
+// std::cout << "std: ";
+// for (auto it = list_insert.begin(); it != list_insert.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+/*
+*   My
+*/ 
+
+// s21::List<int> my_list_insert {0,1,2,3,4,5};
+// std::cout << "my : ";
+// for (auto it = my_list_insert.begin(); it != my_list_insert.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// auto my_it = my_list_insert.begin();
+// my_it++;
+// my_list_insert.insert(my_it, 10);
+
+// std::cout << "my : ";
+// for (auto it = my_list_insert.begin(); it != my_list_insert.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+
+/*
+*
+*   List erase
+*
+*/
+
+/*
+*   Not My
+*/ 
+
 std::list<int> list_insert (std::list<int> {0,1,2,3,4,5});
 
 std::cout << "std: ";
@@ -295,13 +349,17 @@ std::cout << std::endl;
 
 auto it1 = list_insert.begin();
 it1++;
-list_insert.insert(it1, 10);
+list_insert.erase(it1);
 
 std::cout << "std: ";
 for (auto it = list_insert.begin(); it != list_insert.end(); it++) {
     std::cout << *it << " ";
 }
 std::cout << std::endl;
+
+/*
+*   My
+*/ 
 
 s21::List<int> my_list_insert {0,1,2,3,4,5};
 std::cout << "my : ";
@@ -312,17 +370,13 @@ std::cout << std::endl;
 
 auto my_it = my_list_insert.begin();
 my_it++;
-my_list_insert.insert(my_it, 10);
+my_list_insert.erase(my_it);
 
 std::cout << "my : ";
 for (auto it = my_list_insert.begin(); it != my_list_insert.end(); it++) {
     std::cout << *it << " ";
 }
 std::cout << std::endl;
-
-
-
-
 
 return 0;
 }
