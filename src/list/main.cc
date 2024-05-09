@@ -526,8 +526,8 @@ int main() {
 *   My
 */ 
                             
-// s21::List<int> my_list_unique1 {1,2,3,4,5,6,7,8,9};
-s21::List<int> my_list_unique1 {1,2,3};
+s21::List<int> my_list_unique1 {1,2,3,4,5,6,7,8,9};
+// s21::List<int> my_list_unique1 {1,2,3};
 
 std::cout << "1 : ";
 for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
