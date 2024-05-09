@@ -22,7 +22,7 @@ LIBRARY_NAME = s21_containers.a
 all: cat clean build test style-check gcov_report valgrind
 
 test: $(LIBRARY_NAME) $(TEST_OBJ)
-	@./cat.sh UNIT_TEST 4
+	@./cat.sh "UNIT_TEST" 4
 	@$(CC) $(OPTION_FLAGS) $(CPP_FLAGS) $^ -o test $(GTEST_FLAGS) $(TEST_FLAGS)
 	@./test
 
@@ -39,16 +39,22 @@ clean:
 	@rm -f *.o *.a *.out *.gcda *.gcno *.info valgrind_summary.txt
 
 style-check:
-	@./cat.sh STYLE_TEST 10
+	@./cat.sh "STYLE_TEST" 10
 	@clang-format -n -style=Google *.h  */*.h */*.tcc */*.cc
 	@if [ $$? -eq 0 ]; then echo "\033[0;32m          [  PASSED  ]\033[0m"; else echo "\033[0;31m          [  FAILED  ]\033[0m"; fi
 
+style-i:
+	@./cat.sh "STYLE_MAKE" 10
+	@clang-format -i -style=Google *.h  */*.h */*.tcc */*.cc
+	@if [ $$? -eq 0 ]; then echo "\033[0;32m          [  STYLE IS C-LANG FORMATTED  ]\033[0m"; else echo "\033[0;31m          [  FAILED  ]\033[0m"; fi
+
+
 gcov_report: $(LIBRARY_NAME) $(TEST_OBJ)
-	@./cat.sh GCOV_REPORT 20
+	@./cat.sh "GCOV_REPORT" 20
 	@echo "\033[0;32m                    [  PASSED  ]\033[0m";
 
 valgrind: build
-	@./cat.sh VALGRIND_TEST 32
+	@./cat.sh "VALGRIND_TEST" 32
 	@valgrind --trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all ./test 2>&1 | grep -E "ERROR SUMMARY:" > valgrind_summary.txt; \
 	if [ $$? -eq 0 ]; then echo "\033[0;32m                                [  PASSED  ]\033[0m"; else echo "\033[0;31m                                [  FAILED  ]\033[0m"; cat valgrind_summary.txt; fi; \
 
