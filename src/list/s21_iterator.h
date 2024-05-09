@@ -34,28 +34,28 @@ public:
     ~ListIterator(){}
 
     // Copy assignment operator(=).
-    ListIterator& operator=(const ListIterator &rhs);
+    ListIterator<T>& operator=(const ListIterator<T> &rhs);
 
     // Move assignment operator(=).
-    ListIterator& operator=(ListIterator && rhs);
+    ListIterator<T>& operator=(ListIterator<T> && rhs);
 
     
     T& operator*();
 
     // prefix ++
-    ListIterator& operator++();  
+    ListIterator<T>& operator++();  
 
     // postfix ++
-    ListIterator operator++(int);  
+    ListIterator<T> operator++(int);  
 
     // prefix --
-    ListIterator& operator--();  
+    ListIterator<T>& operator--();  
 
     // postfix --
-    ListIterator operator--(int); 
+    ListIterator<T> operator--(int); 
 
-    bool operator==(const ListIterator &rhs);
-    bool operator!=(const ListIterator &rhs);
+    bool operator==(const ListIterator<T> &rhs);
+    bool operator!=(const ListIterator<T> &rhs);
 };
 
 

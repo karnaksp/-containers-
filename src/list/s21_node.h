@@ -41,6 +41,15 @@ public:
     void set_value(T value);
     void set_prev(Node<T>* new_prev);
     void set_next(Node<T>* new_next);
+
+    // comparison
+
+    bool operator==(const Node<T> &rhs);
+    bool operator<(const Node<T> &rhs);
+
+    // swap
+
+    void swap(Node<T>& other);
 };
 
 
@@ -197,6 +206,64 @@ void Node<T>::delete_all_nodes(){
     void Node<T>::set_next(Node<T>* new_next) {
         this->next_ = new_next;
     }
+
+    template <typename T>
+    bool Node<T>::operator==(const Node<T> &rhs) {
+        return this->value_ == rhs.value_;
+    }
+
+    template <typename T>
+    bool Node<T>::operator<(const Node<T> &rhs){
+        return this->value_ < rhs.value_;
+    }
+
+    template <typename T>
+    void Node<T>::swap(Node<T>& other){
+        auto prev_of_this = this->prev_;
+        auto next_of_this = this->next_;
+
+        auto prev_of_other = other.prev_;
+        auto next_of_other = other.next_;
+        
+
+
+        if (this->prev_ == &other) {
+            other.prev_->next_ = this;
+            this->next_->prev_ = &other;
+
+            this->prev_ = prev_of_other;
+            this->next_ = &other;
+
+            other.prev_ = this;
+            other.next_ = next_of_this;
+        } else if (this->next_ == &other) {
+            this->prev_->next_ = &other;
+            other.next_->prev_ = this;
+
+            other.prev_ = prev_of_this;
+            other.next_ = this;
+
+            this->prev_ = &other;
+            this->next_ = next_of_other;
+        } else {
+        
+        this->next_->prev_ = &other;
+        this->prev_->next_ = &other;
+        
+        other.prev_->next_ = this;
+        other.next_->prev_ = this;
+        
+        auto tmp_prev_ = this->prev_;
+        auto tmp_next = this->next_;
+
+        this->prev_ = other.prev_;
+        this->next_ = other.next_;
+
+        other.prev_ = tmp_prev_;
+        other.next_ = tmp_next;
+    }
+    }
+
 
 }
 

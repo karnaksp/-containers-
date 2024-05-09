@@ -380,6 +380,50 @@ int main() {
 
 
 
+// /*
+// *
+// *   List swap
+// *
+// */
+
+// /*
+// *   My
+// */ 
+
+// s21::List<int> my_list_swap1 {5,4,3,2,1};
+// s21::List<int> my_list_swap2 {1,2,3,4,5};
+// std::cout << "1 : ";
+// for (auto it = my_list_swap1.begin(); it != my_list_swap1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// std::cout << "2 : ";
+// for (auto it = my_list_swap2.begin(); it != my_list_swap2.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// // auto my_it = my_list_insert.begin();
+// // my_it++;
+// // my_list_insert.erase(my_it);
+
+// my_list_swap1.swap(my_list_swap2);
+
+// std::cout << "1 : ";
+// for (auto it = my_list_swap1.begin(); it != my_list_swap1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// std::cout << "2 : ";
+// for (auto it = my_list_swap2.begin(); it != my_list_swap2.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+
+
 /*
 *
 *   List swap
@@ -389,35 +433,18 @@ int main() {
 /*
 *   My
 */ 
-
-s21::List<int> my_list_swap1 {5,4,3,2,1};
-s21::List<int> my_list_swap2 {1,2,3,4,5};
+//                             -6, 1, 2, 3, 4, 5, 10, 100, 1000
+s21::List<int> my_list_sort1 {5,10, 4, 100, 3,2,1, 1000, -6};
 std::cout << "1 : ";
-for (auto it = my_list_swap1.begin(); it != my_list_swap1.end(); it++) {
+for (auto it = my_list_sort1.begin(); it != my_list_sort1.end(); it++) {
     std::cout << *it << " ";
 }
 std::cout << std::endl;
+
+my_list_sort1.sort();
 
 std::cout << "2 : ";
-for (auto it = my_list_swap2.begin(); it != my_list_swap2.end(); it++) {
-    std::cout << *it << " ";
-}
-std::cout << std::endl;
-
-// auto my_it = my_list_insert.begin();
-// my_it++;
-// my_list_insert.erase(my_it);
-
-my_list_swap1.swap(my_list_swap2);
-
-std::cout << "1 : ";
-for (auto it = my_list_swap1.begin(); it != my_list_swap1.end(); it++) {
-    std::cout << *it << " ";
-}
-std::cout << std::endl;
-
-std::cout << "2 : ";
-for (auto it = my_list_swap2.begin(); it != my_list_swap2.end(); it++) {
+for (auto it = my_list_sort1.begin(); it != my_list_sort1.end(); it++) {
     std::cout << *it << " ";
 }
 std::cout << std::endl;

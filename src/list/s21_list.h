@@ -467,6 +467,29 @@ void List<T>::unique(){
 template <typename T>
 void List<T>::sort(){
 
+    for (auto i = this->begin(); i != this->end(); i++) {
+        auto min = i;
+
+        for (auto j = i; j != this->end(); j++ ) {
+            if (i == j) {
+                continue;
+            }
+
+            if (*min > *j) {
+                min = j;      
+            }
+        }
+        if (min != i) {            
+            auto tmp = min.current;
+            i.current->swap(*tmp);
+
+            if (i == this->begin()) {
+                this->head_ = min.current;
+            }
+            i = min;
+        }
+    }
+
 }
 
 
