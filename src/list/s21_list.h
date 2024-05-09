@@ -480,7 +480,15 @@ void List<T>::reverse(){
 // removes consecutive duplicate elements
 template <typename T>
 void List<T>::unique(){
-        
+    for (auto it = this->begin(); it != this->end();) {
+        auto next_it = it;
+        next_it++;
+        if (*it == *next_it) {
+            this->erase(it);
+        }
+        it = next_it;
+
+    }
 }
     
 // sorts the elements

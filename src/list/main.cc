@@ -450,9 +450,48 @@ int main() {
 // std::cout << std::endl;
 
 
+// /*
+// *
+// *   List merge
+// *
+// */
+
+// /*
+// *   My
+// */ 
+                            
+// s21::List<int> my_list_merge1 {5,10, 4, 100, 3,2,1, 1000, -6};
+// s21::List<int> my_list_merge2 {-10, -4, 0,1,2,3, 8, 99,101, 1000};
+
+// my_list_merge1.sort();
+// my_list_merge2.sort();
+
+// std::cout << "1 : ";
+// for (auto it = my_list_merge1.begin(); it != my_list_merge1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+
+// std::cout << "2 : ";
+// for (auto it = my_list_merge2.begin(); it != my_list_merge2.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// my_list_merge1.merge(my_list_merge2);
+
+// std::cout << "1 : ";
+// for (auto it = my_list_merge1.begin(); it != my_list_merge1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+
+
 /*
 *
-*   List merge
+*   List unique
 *
 */
 
@@ -460,32 +499,23 @@ int main() {
 *   My
 */ 
                             
-s21::List<int> my_list_merge1 {5,10, 4, 100, 3,2,1, 1000, -6};
-s21::List<int> my_list_merge2 {-10, -4, 0,1,2,3, 8, 99,101, 1000};
-
-my_list_merge1.sort();
-my_list_merge2.sort();
+s21::List<int> my_list_unique1 {0,0, 1, 2, 3, 3, 3, 4, 5, 6, 8, 3, 2, 6};
 
 std::cout << "1 : ";
-for (auto it = my_list_merge1.begin(); it != my_list_merge1.end(); it++) {
+for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
     std::cout << *it << " ";
 }
 std::cout << std::endl;
 
-
-std::cout << "2 : ";
-for (auto it = my_list_merge2.begin(); it != my_list_merge2.end(); it++) {
-    std::cout << *it << " ";
-}
-std::cout << std::endl;
-
-my_list_merge1.merge(my_list_merge2);
+my_list_unique1.unique();
 
 std::cout << "1 : ";
-for (auto it = my_list_merge1.begin(); it != my_list_merge1.end(); it++) {
+for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
     std::cout << *it << " ";
 }
 std::cout << std::endl;
+
+
 
 return 0;
 }
