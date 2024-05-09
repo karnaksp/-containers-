@@ -424,27 +424,65 @@ int main() {
 
 
 
+// /*
+// *
+// *   List swap
+// *
+// */
+
+// /*
+// *   My
+// */ 
+// //                             -6, 1, 2, 3, 4, 5, 10, 100, 1000
+// s21::List<int> my_list_sort1 {5,10, 4, 100, 3,2,1, 1000, -6};
+// std::cout << "1 : ";
+// for (auto it = my_list_sort1.begin(); it != my_list_sort1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// my_list_sort1.sort();
+
+// std::cout << "2 : ";
+// for (auto it = my_list_sort1.begin(); it != my_list_sort1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+
 /*
 *
-*   List swap
+*   List merge
 *
 */
 
 /*
 *   My
 */ 
-//                             -6, 1, 2, 3, 4, 5, 10, 100, 1000
-s21::List<int> my_list_sort1 {5,10, 4, 100, 3,2,1, 1000, -6};
+                            
+s21::List<int> my_list_merge1 {5,10, 4, 100, 3,2,1, 1000, -6};
+s21::List<int> my_list_merge2 {-10, -4, 0,1,2,3, 8, 99,101, 1000};
+
+my_list_merge1.sort();
+my_list_merge2.sort();
+
 std::cout << "1 : ";
-for (auto it = my_list_sort1.begin(); it != my_list_sort1.end(); it++) {
+for (auto it = my_list_merge1.begin(); it != my_list_merge1.end(); it++) {
     std::cout << *it << " ";
 }
 std::cout << std::endl;
 
-my_list_sort1.sort();
 
 std::cout << "2 : ";
-for (auto it = my_list_sort1.begin(); it != my_list_sort1.end(); it++) {
+for (auto it = my_list_merge2.begin(); it != my_list_merge2.end(); it++) {
+    std::cout << *it << " ";
+}
+std::cout << std::endl;
+
+my_list_merge1.merge(my_list_merge2);
+
+std::cout << "1 : ";
+for (auto it = my_list_merge1.begin(); it != my_list_merge1.end(); it++) {
     std::cout << *it << " ";
 }
 std::cout << std::endl;

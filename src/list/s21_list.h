@@ -442,7 +442,27 @@ void List<T>::swap(List<T>& other){
 // merges two sorted lists
 template <typename T>
 void List<T>::merge(List<T>& other){
-
+    for (auto i = this->begin(); i != this->end(); i++) {
+        for (auto j = other.begin(); j != other.end(); ) {
+            if (*j < *i || *j == *i) {
+                if (i == this->begin()) {
+                    this->push_front(*j);
+                    
+                } else {
+                    auto tmp = i;
+                    this->insert(tmp, *j);
+                }
+                auto tmp = j;
+                tmp++;
+                other.erase(j);
+                j = tmp;
+                
+            }
+            else {
+                break;
+            }
+        }
+    }
 }
     
 // transfers elements from list other starting from pos
@@ -489,7 +509,6 @@ void List<T>::sort(){
             i = min;
         }
     }
-
 }
 
 
