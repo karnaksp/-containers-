@@ -89,6 +89,8 @@ public:
     // returns an iterator to the beginning
     ListIterator<T> begin();
 
+    ListConstIterator<T> cbegin();
+
     // returns an iterator to the end
     ListIterator<T> end(); 
  
@@ -121,6 +123,7 @@ public:
     returns the iterator that points to the new element
     */
     ListIterator<T> insert(ListIterator<T> pos, const T& value);
+    void insert(ListConstIterator<T> pos, const T& value);
     
     // erases an element at pos
     void erase(ListIterator<T> pos);
@@ -144,7 +147,7 @@ public:
     void merge(List<T>& other);
     
     // transfers elements from list other starting from pos
-    void splice(ListConstIterator<T> pos, List<T>& other);
+    void splice(ListIterator<T> pos, List<T>& other);
     
     // reverses the order of the elements
     void reverse();
@@ -309,6 +312,11 @@ const T& List<T>::back() {
     }
 
     template <typename T>
+    ListConstIterator<T> List<T>::cbegin() {
+        return typename s21::ListConstIterator<T>::ListConstIterator(this->head_);
+    }
+
+    template <typename T>
     ListIterator<T> List<T>::end() {
         return typename s21::ListIterator<T>::ListIterator(this->post_tail_);
     }
@@ -365,6 +373,17 @@ ListIterator<T> List<T>::insert(ListIterator<T> pos, const T& value){
                 this->head_ = this->head_->get_prev();
         }
         return ListIterator(pos.current->get_next());
+}
+
+template <typename T>
+void List<T>::insert(ListConstIterator<T> pos, const T& value){
+        auto pos_tmp = pos;
+        auto ref = pos.current;
+        ref->insert_node_before_curr(value);
+        this->size_++;
+        if (ref == this->head_) {
+                this->head_ = this->head_->get_prev();
+        }
 }
 
 template <typename T>
@@ -467,8 +486,22 @@ void List<T>::merge(List<T>& other){
     
 // transfers elements from list other starting from pos
 template <typename T>
-void List<T>::splice(ListConstIterator<T> pos, List<T>& other){
+void List<T>::splice(ListIterator<T> pos, List<T>& other){
+    auto tmp_pos = pos.current;
+    auto just_it = ListIterator<T>(tmp_pos);
+    for (auto it = other.begin(); it != other.end();) {
+        if (tmp_pos == this->begin().current) {
+            this->push_front(*it);
+                    
+        } else {
+            this->insert(pos, *it);
+        }
+        auto tmp = it;
+        tmp++;
+        other.erase(it);
+        it = tmp;
 
+    }
 }
     
 // reverses the order of the elements

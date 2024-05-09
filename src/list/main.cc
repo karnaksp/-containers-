@@ -516,9 +516,37 @@ int main() {
 // std::cout << std::endl;
 
 
+// /*
+// *
+// *   List reverse
+// *
+// */
+
+// /*
+// *   My
+// */ 
+                            
+// s21::List<int> my_list_unique1 {1,2,3,4,5,6,7,8,9};
+// // s21::List<int> my_list_unique1 {1,2,3};
+
+// std::cout << "1 : ";
+// for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// my_list_unique1.reverse();
+
+// std::cout << "1 : ";
+// for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+
 /*
 *
-*   List reverse
+*   List splice
 *
 */
 
@@ -526,23 +554,26 @@ int main() {
 *   My
 */ 
                             
-s21::List<int> my_list_unique1 {1,2,3,4,5,6,7,8,9};
+s21::List<int> my_list_splice_origin {-10,20};
+s21::List<int> my_list_splice_source {1,2,3,4,5,6,7,8,9};
 // s21::List<int> my_list_unique1 {1,2,3};
 
 std::cout << "1 : ";
-for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
+for (auto it = my_list_splice_origin.begin(); it != my_list_splice_origin.end(); it++) {
     std::cout << *it << " ";
 }
 std::cout << std::endl;
 
-my_list_unique1.reverse();
+auto it = my_list_splice_origin.begin();
+it++;
+
+my_list_splice_origin.splice(it, my_list_splice_source);
 
 std::cout << "1 : ";
-for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
+for (auto it = my_list_splice_origin.begin(); it != my_list_splice_origin.end(); it++) {
     std::cout << *it << " ";
 }
 std::cout << std::endl;
-
 
 return 0;
 }
