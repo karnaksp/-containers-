@@ -489,9 +489,36 @@ int main() {
 
 
 
+// /*
+// *
+// *   List unique
+// *
+// */
+
+// /*
+// *   My
+// */ 
+                            
+// s21::List<int> my_list_unique1 {0,0, 1, 2, 3, 3, 3, 4, 5, 6, 8, 3, 2, 6};
+
+// std::cout << "1 : ";
+// for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// my_list_unique1.unique();
+
+// std::cout << "1 : ";
+// for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+
 /*
 *
-*   List unique
+*   List reverse
 *
 */
 
@@ -499,7 +526,8 @@ int main() {
 *   My
 */ 
                             
-s21::List<int> my_list_unique1 {0,0, 1, 2, 3, 3, 3, 4, 5, 6, 8, 3, 2, 6};
+// s21::List<int> my_list_unique1 {1,2,3,4,5,6,7,8,9};
+s21::List<int> my_list_unique1 {1,2,3};
 
 std::cout << "1 : ";
 for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
@@ -507,14 +535,13 @@ for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
 }
 std::cout << std::endl;
 
-my_list_unique1.unique();
+my_list_unique1.reverse();
 
 std::cout << "1 : ";
 for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
     std::cout << *it << " ";
 }
 std::cout << std::endl;
-
 
 
 return 0;

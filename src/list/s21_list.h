@@ -474,6 +474,33 @@ void List<T>::splice(ListConstIterator<T> pos, List<T>& other){
 // reverses the order of the elements
 template <typename T>
 void List<T>::reverse(){
+    auto tmp_it_front = this->begin();
+    // auto tmp_pre_head = tmp_it_front.current->get_prev();
+    auto tmp_it_back = this->end();
+    auto tmp_it_back_back = tmp_it_back;
+    tmp_it_back_back--;
+
+
+    for (auto it = this->begin(); it != tmp_it_back;) {
+        auto it_next = it;
+        it_next++;
+        if (it == this->begin()) {
+            it.current->set_prev(it.current->get_next());
+            it.current->set_next( tmp_it_back.current);
+            this->tail_ = it.current;
+        } else if (it == tmp_it_back_back) {
+            it.current->set_next(it.current->get_prev());
+            it.current->set_prev( it.current->get_next());
+            this->head_ = it.current;
+        } else {
+            auto tmp_next = it.current->get_next();
+            it.current->set_next(it.current->get_prev());
+            it.current->set_prev( tmp_next);
+        }
+
+        it = it_next;
+    }
+
 
 }
     
