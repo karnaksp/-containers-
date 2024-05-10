@@ -211,9 +211,7 @@ public:
     // swaps the contents
     template <typename T>
     void Queue<T>::swap(Queue& other){
-        auto tmp = this->queue_;
-        this->queue_ = other.queue_;
-        other.queue_ = tmp;
+        this->queue_.swap(other.queue_);
     }
 
 

@@ -67,6 +67,7 @@ public:
 
     // assignment operator overload for moving an object
     List<T> operator=(List<T> &&l);
+    List<T> operator=(List<T> &l);
 
             /**********************************
             *
