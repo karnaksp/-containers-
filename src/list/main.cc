@@ -380,44 +380,197 @@ int main() {
 
 
 
+// /*
+// *
+// *   List swap
+// *
+// */
+
+// /*
+// *   My
+// */ 
+
+// s21::List<int> my_list_swap1 {5,4,3,2,1};
+// s21::List<int> my_list_swap2 {1,2,3,4,5};
+// std::cout << "1 : ";
+// for (auto it = my_list_swap1.begin(); it != my_list_swap1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// std::cout << "2 : ";
+// for (auto it = my_list_swap2.begin(); it != my_list_swap2.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// // auto my_it = my_list_insert.begin();
+// // my_it++;
+// // my_list_insert.erase(my_it);
+
+// my_list_swap1.swap(my_list_swap2);
+
+// std::cout << "1 : ";
+// for (auto it = my_list_swap1.begin(); it != my_list_swap1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// std::cout << "2 : ";
+// for (auto it = my_list_swap2.begin(); it != my_list_swap2.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+
+
+// /*
+// *
+// *   List swap
+// *
+// */
+
+// /*
+// *   My
+// */ 
+// //                             -6, 1, 2, 3, 4, 5, 10, 100, 1000
+// s21::List<int> my_list_sort1 {5,10, 4, 100, 3,2,1, 1000, -6};
+// std::cout << "1 : ";
+// for (auto it = my_list_sort1.begin(); it != my_list_sort1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// my_list_sort1.sort();
+
+// std::cout << "2 : ";
+// for (auto it = my_list_sort1.begin(); it != my_list_sort1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+
+// /*
+// *
+// *   List merge
+// *
+// */
+
+// /*
+// *   My
+// */ 
+                            
+// s21::List<int> my_list_merge1 {5,10, 4, 100, 3,2,1, 1000, -6};
+// s21::List<int> my_list_merge2 {-10, -4, 0,1,2,3, 8, 99,101, 1000};
+
+// my_list_merge1.sort();
+// my_list_merge2.sort();
+
+// std::cout << "1 : ";
+// for (auto it = my_list_merge1.begin(); it != my_list_merge1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+
+// std::cout << "2 : ";
+// for (auto it = my_list_merge2.begin(); it != my_list_merge2.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// my_list_merge1.merge(my_list_merge2);
+
+// std::cout << "1 : ";
+// for (auto it = my_list_merge1.begin(); it != my_list_merge1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+
+
+// /*
+// *
+// *   List unique
+// *
+// */
+
+// /*
+// *   My
+// */ 
+                            
+// s21::List<int> my_list_unique1 {0,0, 1, 2, 3, 3, 3, 4, 5, 6, 8, 3, 2, 6};
+
+// std::cout << "1 : ";
+// for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// my_list_unique1.unique();
+
+// std::cout << "1 : ";
+// for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+
+// /*
+// *
+// *   List reverse
+// *
+// */
+
+// /*
+// *   My
+// */ 
+                            
+// s21::List<int> my_list_unique1 {1,2,3,4,5,6,7,8,9};
+// // s21::List<int> my_list_unique1 {1,2,3};
+
+// std::cout << "1 : ";
+// for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+// my_list_unique1.reverse();
+
+// std::cout << "1 : ";
+// for (auto it = my_list_unique1.begin(); it != my_list_unique1.end(); it++) {
+//     std::cout << *it << " ";
+// }
+// std::cout << std::endl;
+
+
 /*
 *
-*   List swap
+*   List splice
 *
 */
 
 /*
 *   My
 */ 
-
-s21::List<int> my_list_swap1 {5,4,3,2,1};
-s21::List<int> my_list_swap2 {1,2,3,4,5};
-std::cout << "1 : ";
-for (auto it = my_list_swap1.begin(); it != my_list_swap1.end(); it++) {
-    std::cout << *it << " ";
-}
-std::cout << std::endl;
-
-std::cout << "2 : ";
-for (auto it = my_list_swap2.begin(); it != my_list_swap2.end(); it++) {
-    std::cout << *it << " ";
-}
-std::cout << std::endl;
-
-// auto my_it = my_list_insert.begin();
-// my_it++;
-// my_list_insert.erase(my_it);
-
-my_list_swap1.swap(my_list_swap2);
+                            
+s21::List<int> my_list_splice_origin {-10,20};
+s21::List<int> my_list_splice_source {1,2,3,4,5,6,7,8,9};
+// s21::List<int> my_list_unique1 {1,2,3};
 
 std::cout << "1 : ";
-for (auto it = my_list_swap1.begin(); it != my_list_swap1.end(); it++) {
+for (auto it = my_list_splice_origin.begin(); it != my_list_splice_origin.end(); it++) {
     std::cout << *it << " ";
 }
 std::cout << std::endl;
 
-std::cout << "2 : ";
-for (auto it = my_list_swap2.begin(); it != my_list_swap2.end(); it++) {
+auto it = my_list_splice_origin.begin();
+it++;
+
+my_list_splice_origin.splice(it, my_list_splice_source);
+
+std::cout << "1 : ";
+for (auto it = my_list_splice_origin.begin(); it != my_list_splice_origin.end(); it++) {
     std::cout << *it << " ";
 }
 std::cout << std::endl;

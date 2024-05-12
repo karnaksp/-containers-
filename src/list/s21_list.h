@@ -1,5 +1,5 @@
-#ifndef S21_LIST
-#define S21_LIST
+#ifndef S21_LIST_H
+#define S21_LIST_H
 
 #include <cstddef>
 #include <initializer_list>
@@ -67,6 +67,7 @@ public:
 
     // assignment operator overload for moving an object
     List<T> operator=(List<T> &&l);
+    List<T> operator=(List<T> &l);
 
             /**********************************
             *
@@ -88,6 +89,8 @@ public:
 
     // returns an iterator to the beginning
     ListIterator<T> begin();
+
+    ListConstIterator<T> cbegin();
 
     // returns an iterator to the end
     ListIterator<T> end(); 
@@ -121,6 +124,7 @@ public:
     returns the iterator that points to the new element
     */
     ListIterator<T> insert(ListIterator<T> pos, const T& value);
+    void insert(ListConstIterator<T> pos, const T& value);
     
     // erases an element at pos
     void erase(ListIterator<T> pos);
@@ -144,7 +148,7 @@ public:
     void merge(List<T>& other);
     
     // transfers elements from list other starting from pos
-    void splice(ListConstIterator<T> pos, List<T>& other);
+    void splice(ListIterator<T> pos, List<T>& other);
     
     // reverses the order of the elements
     void reverse();
@@ -309,6 +313,11 @@ const T& List<T>::back() {
     }
 
     template <typename T>
+    ListConstIterator<T> List<T>::cbegin() {
+        return typename s21::ListConstIterator<T>::ListConstIterator(this->head_);
+    }
+
+    template <typename T>
     ListIterator<T> List<T>::end() {
         return typename s21::ListIterator<T>::ListIterator(this->post_tail_);
     }
@@ -365,6 +374,17 @@ ListIterator<T> List<T>::insert(ListIterator<T> pos, const T& value){
                 this->head_ = this->head_->get_prev();
         }
         return ListIterator(pos.current->get_next());
+}
+
+template <typename T>
+void List<T>::insert(ListConstIterator<T> pos, const T& value){
+        auto pos_tmp = pos;
+        auto ref = pos.current;
+        ref->insert_node_before_curr(value);
+        this->size_++;
+        if (ref == this->head_) {
+                this->head_ = this->head_->get_prev();
+        }
 }
 
 template <typename T>
@@ -442,31 +462,122 @@ void List<T>::swap(List<T>& other){
 // merges two sorted lists
 template <typename T>
 void List<T>::merge(List<T>& other){
-
+    for (auto i = this->begin(); i != this->end(); i++) {
+        for (auto j = other.begin(); j != other.end(); ) {
+            if (*j < *i || *j == *i) {
+                if (i == this->begin()) {
+                    this->push_front(*j);
+                    
+                } else {
+                    auto tmp = i;
+                    this->insert(tmp, *j);
+                }
+                auto tmp = j;
+                tmp++;
+                other.erase(j);
+                j = tmp;
+                
+            }
+            else {
+                break;
+            }
+        }
+    }
 }
     
 // transfers elements from list other starting from pos
 template <typename T>
-void List<T>::splice(ListConstIterator<T> pos, List<T>& other){
+void List<T>::splice(ListIterator<T> pos, List<T>& other){
+    auto tmp_pos = pos.current;
+    auto just_it = ListIterator<T>(tmp_pos);
+    for (auto it = other.begin(); it != other.end();) {
+        if (tmp_pos == this->begin().current) {
+            this->push_front(*it);
+                    
+        } else {
+            this->insert(pos, *it);
+        }
+        auto tmp = it;
+        tmp++;
+        other.erase(it);
+        it = tmp;
 
+    }
 }
     
 // reverses the order of the elements
 template <typename T>
 void List<T>::reverse(){
+    auto tmp_it_front = this->begin();
+    // auto tmp_pre_head = tmp_it_front.current->get_prev();
+    auto tmp_it_back = this->end();
+    auto tmp_it_back_back = tmp_it_back;
+    tmp_it_back_back--;
+
+
+    for (auto it = this->begin(); it != tmp_it_back;) {
+        auto it_next = it;
+        it_next++;
+        if (it == this->begin()) {
+            it.current->set_prev(it.current->get_next());
+            it.current->set_next( tmp_it_back.current);
+            this->tail_ = it.current;
+        } else if (it == tmp_it_back_back) {
+            it.current->set_next(it.current->get_prev());
+            it.current->set_prev( it.current->get_next());
+            this->head_ = it.current;
+        } else {
+            auto tmp_next = it.current->get_next();
+            it.current->set_next(it.current->get_prev());
+            it.current->set_prev( tmp_next);
+        }
+
+        it = it_next;
+    }
+
 
 }
     
 // removes consecutive duplicate elements
 template <typename T>
 void List<T>::unique(){
-        
+    for (auto it = this->begin(); it != this->end();) {
+        auto next_it = it;
+        next_it++;
+        if (*it == *next_it) {
+            this->erase(it);
+        }
+        it = next_it;
+
+    }
 }
     
 // sorts the elements
 template <typename T>
 void List<T>::sort(){
 
+    for (auto i = this->begin(); i != this->end(); i++) {
+        auto min = i;
+
+        for (auto j = i; j != this->end(); j++ ) {
+            if (i == j) {
+                continue;
+            }
+
+            if (*min > *j) {
+                min = j;      
+            }
+        }
+        if (min != i) {            
+            auto tmp = min.current;
+            i.current->swap(*tmp);
+
+            if (i == this->begin()) {
+                this->head_ = min.current;
+            }
+            i = min;
+        }
+    }
 }
 
 

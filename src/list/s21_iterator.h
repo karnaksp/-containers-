@@ -23,6 +23,7 @@ public:
 public:
     // constructor with address parametr
     ListIterator(Node<T>* address);
+    ListIterator(const Node<T>* address);
 
     // Copy constructor
     ListIterator(const ListIterator &other);
@@ -34,28 +35,28 @@ public:
     ~ListIterator(){}
 
     // Copy assignment operator(=).
-    ListIterator& operator=(const ListIterator &rhs);
+    ListIterator<T>& operator=(const ListIterator<T> &rhs);
 
     // Move assignment operator(=).
-    ListIterator& operator=(ListIterator && rhs);
+    ListIterator<T>& operator=(ListIterator<T> && rhs);
 
     
     T& operator*();
 
     // prefix ++
-    ListIterator& operator++();  
+    ListIterator<T>& operator++();  
 
     // postfix ++
-    ListIterator operator++(int);  
+    ListIterator<T> operator++(int);  
 
     // prefix --
-    ListIterator& operator--();  
+    ListIterator<T>& operator--();  
 
     // postfix --
-    ListIterator operator--(int); 
+    ListIterator<T> operator--(int); 
 
-    bool operator==(const ListIterator &rhs);
-    bool operator!=(const ListIterator &rhs);
+    bool operator==(const ListIterator<T> &rhs);
+    bool operator!=(const ListIterator<T> &rhs);
 };
 
 
@@ -65,8 +66,15 @@ template <typename T>
         this->current = address;
     }
 
+template <typename T>
+    ListIterator<T>::ListIterator(const Node<T>* address) {
+        s21::Node<int>* tmp = address;
+        this->current = tmp;
+    }
+
     template <typename T>
     ListIterator<T>::ListIterator(const ListIterator<T> &other) {
+
         this->current = other.current;
     }
 
@@ -156,10 +164,71 @@ template <typename T>
         return this->current != rhs.current;
     }
 
+
+
+
     template <typename T>
     class ListConstIterator {
-    };
+        public:
+    // using value_type = T;
+    // using reference = value_type&;
+    // using const_reference = const value_type&;
+    // using iterator = ListIterator;
+    using size_type = std::size_t;
+    
+    public:
+        const Node<T>* current;
+    public:
+        // constructor with address parametr
+        ListConstIterator(Node<T>* address);
 
+        // // Copy constructor
+        // ListIterator(const ListIterator &other);
+
+        // // Move constructor
+        // ListIterator(ListIterator &&other);
+
+        // Destructor
+        ~ListConstIterator(){}
+
+        // // Copy assignment operator(=).
+        // ListIterator<T>& operator=(const ListIterator<T> &rhs);
+
+        // // Move assignment operator(=).
+        // ListIterator<T>& operator=(ListIterator<T> && rhs);
+
+        T& operator*();
+
+        // // prefix ++
+        // ListIterator<T>& operator++();  
+
+        // // postfix ++
+        // ListIterator<T> operator++(int);  
+
+        // // prefix --
+        // ListIterator<T>& operator--();  
+
+        // // postfix --
+        // ListIterator<T> operator--(int); 
+
+        bool operator==(const ListConstIterator<T> &rhs);
+        // bool operator!=(const ListIterator<T> &rhs);
+        };
+
+    template <typename T>
+    ListConstIterator<T>::ListConstIterator(Node<T>* address) {
+        this->current = address;
+    }
+
+    template <typename T>
+    T& ListConstIterator<T>::operator*() {
+        return this->current->value_;
+    }
+
+    template <typename T>
+    bool ListConstIterator<T>::operator==(const ListConstIterator<T> &rhs) {
+        return this->current == rhs.current;
+    }
 
 }
 
