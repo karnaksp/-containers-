@@ -10,7 +10,7 @@
                 "${file}",
                 "s21_list.h",
                 "s21_iterator.h",
-                "s21_node.h",
+                "s21_ListNode.h",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

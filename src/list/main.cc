@@ -3,32 +3,32 @@
 #include <list>
 
 #include "s21_list.h"
-#include "s21_node.h"
+#include "s21_ListListNode.h"
 
 // #include "s21_list.cc"
-// #include "s21_node.cc"
+// #include "s21_ListNode.cc"
 
 int main() {
 
     /*
-    *   insert_node_after_curr
+    *   insert_ListNode_after_curr
     */
 
-    // s21::Node* new_node = new s21::Node;
-    // new_node->insert_node_after_curr(2);
+    // s21::ListNode* new_ListNode = new s21::ListNode;
+    // new_ListNode->insert_ListNode_after_curr(2);
 
-    // new_node->print_node();
-    // new_node->next_->print_node();
+    // new_ListNode->print_ListNode();
+    // new_ListNode->next_->print_ListNode();
 
-    // // new_node->next_->delete_current_node();
-    // // new_node->print_node();
+    // // new_ListNode->next_->delete_current_ListNode();
+    // // new_ListNode->print_ListNode();
 
-    // new_node->delete_all_nodes_curr_and_forward();
-    // // new_node->print_node();
+    // new_ListNode->delete_all_ListNodes_curr_and_forward();
+    // // new_ListNode->print_ListNode();
 
 
     /*
-    *   insert_node_before_curr
+    *   insert_ListNode_before_curr
     */
 
 
@@ -37,13 +37,13 @@ int main() {
 *   Test of inserts, print all and delete all
 *  
 */
-//    s21::Node* new_ptr = new s21::Node;
-//    new_ptr->insert_node_before_curr(12);
-//    new_ptr->insert_node_after_curr(16);
-//    new_ptr->insert_node_after_curr(17);
-//    new_ptr->insert_node_after_curr(18);
-//    new_ptr->print_node_all();
-//    new_ptr->delete_all_nodes();
+//    s21::ListNode* new_ptr = new s21::ListNode;
+//    new_ptr->insert_ListNode_before_curr(12);
+//    new_ptr->insert_ListNode_after_curr(16);
+//    new_ptr->insert_ListNode_after_curr(17);
+//    new_ptr->insert_ListNode_after_curr(18);
+//    new_ptr->print_ListNode_all();
+//    new_ptr->delete_all_ListNodes();
    
 /*
 *
@@ -57,12 +57,12 @@ int main() {
 // list.push_back(3);
 // list.push_back(4);
 // list.push_front(-10);
-// list.print_all_valid_nodes();
+// list.print_all_valid_ListNodes();
 // std::cout << "\nSize: " << list.size() << std::endl;
 // list.pop_front();
-// list.print_all_valid_nodes();
+// list.print_all_valid_ListNodes();
 // list.pop_back();
-// list.print_all_valid_nodes();
+// list.print_all_valid_ListNodes();
 // std::cout << "\nSize: " << list.size() << std::endl;
 // list.pop_back();
 // list.pop_back();
@@ -71,10 +71,10 @@ int main() {
 // std::cout << "\nSize: " << list.size() << std::endl;
 // list.push_front(101);
 // list.push_back(999);
-// list.print_all_nodes_with_hidden();
+// list.print_all_ListNodes_with_hidden();
 // std::cout << "\nlist.clear() "  << std::endl;
 // list.clear();
-// list.print_all_nodes_with_hidden();
+// list.print_all_ListNodes_with_hidden();
 
 
 /*
@@ -90,7 +90,7 @@ int main() {
 // list.push_back(4);
 // list.push_front(-10);
 
-// list.print_all_valid_nodes();
+// list.print_all_valid_ListNodes();
 
 // auto start = list.begin();
 // std::cout << "Start: " << *start << std::endl;
@@ -174,7 +174,7 @@ int main() {
 //     std::cout << *it << std::endl;
 // }
 
-// list.print_all_valid_nodes();
+// list.print_all_valid_ListNodes();
 
 /*
 *
@@ -253,7 +253,7 @@ int main() {
 */
 
 // s21::List list_7 = s21::List(0);
-// list_7.print_all_valid_nodes();
+// list_7.print_all_valid_ListNodes();
 
 
 /*
@@ -263,18 +263,18 @@ int main() {
 */
 
 // s21::List list_8 {1,2,3,4,5,6,7,8,9, 10};
-// list_8.print_all_valid_nodes();
+// list_8.print_all_valid_ListNodes();
 
 // s21::List list_empty {};
-// list_empty.print_all_valid_nodes();
+// list_empty.print_all_valid_ListNodes();
 
 // s21::List list_copy (list_8);
-// list_copy.print_all_valid_nodes();
+// list_copy.print_all_valid_ListNodes();
 
 // s21::List<int> list_move (s21::List<int> {-1,0,1,2,3});
 // std::list<int> list_std (std::list<int> {-1,0,1,2,3});
 // std::list<int> list_std1 (std::list<int> {-1});
-// // list_move.print_all_valid_nodes();
+// // list_move.print_all_valid_ListNodes();
 // std::cout << list_move.max_size() << std::endl;
 // std::cout << list_std.max_size() << std::endl;
 // std::cout << list_std1.max_size() << std::endl;

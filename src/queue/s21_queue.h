@@ -6,7 +6,7 @@
 #include <limits>
 
 #include "../list/s21_list.h"
-#include "../list/s21_node.h"
+#include "../list/s21_ListNode.h"
 #include "../list/s21_iterator.h"
 
 namespace s21 {

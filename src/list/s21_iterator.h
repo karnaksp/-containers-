@@ -3,7 +3,7 @@
 
 #include <cstddef>
 
-#include "s21_node.h"
+#include "s21_ListNode.h"
 
 namespace s21 {
 
@@ -19,11 +19,11 @@ public:
     using size_type = std::size_t;
     
 public:
-    Node<T>* current;
+    ListNode<T>* current;
 public:
     // constructor with address parametr
-    ListIterator(Node<T>* address);
-    ListIterator(const Node<T>* address);
+    ListIterator(ListNode<T>* address);
+    ListIterator(const ListNode<T>* address);
 
     // Copy constructor
     ListIterator(const ListIterator &other);
@@ -62,13 +62,13 @@ public:
 
 
 template <typename T>
-    ListIterator<T>::ListIterator(Node<T>* address) {
+    ListIterator<T>::ListIterator(ListNode<T>* address) {
         this->current = address;
     }
 
 template <typename T>
-    ListIterator<T>::ListIterator(const Node<T>* address) {
-        s21::Node<int>* tmp = address;
+    ListIterator<T>::ListIterator(const ListNode<T>* address) {
+        s21::ListNode<int>* tmp = address;
         this->current = tmp;
     }
 
@@ -177,10 +177,10 @@ template <typename T>
     using size_type = std::size_t;
     
     public:
-        const Node<T>* current;
+        const ListNode<T>* current;
     public:
         // constructor with address parametr
-        ListConstIterator(Node<T>* address);
+        ListConstIterator(ListNode<T>* address);
 
         // // Copy constructor
         // ListIterator(const ListIterator &other);
@@ -216,7 +216,7 @@ template <typename T>
         };
 
     template <typename T>
-    ListConstIterator<T>::ListConstIterator(Node<T>* address) {
+    ListConstIterator<T>::ListConstIterator(ListNode<T>* address) {
         this->current = address;
     }
 
