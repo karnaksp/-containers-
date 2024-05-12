@@ -1,9 +1,9 @@
 #include "tests.h"
 
 namespace s21 {
-template <typename key_type, typename value_type>
-bool compare_map(s21::map<key_type, value_type> my_map,
-                 std::map<key_type, value_type> std_map) {
+template <typename MapKey, typename MapValue>
+bool compare_map(s21::map<MapKey, MapValue> my_map,
+                 std::map<MapKey, MapValue> std_map) {
   bool res = true;
   auto i2 = my_map.begin();
   for (auto i1 = std_map.begin(); i1 != std_map.end(); ++i1, ++i2) {
@@ -241,6 +241,178 @@ TEST(map, func_insert_key_obj_3) {
   EXPECT_TRUE(A.insert(9, 1).second);
   EXPECT_TRUE(compare_map(A, B));
   EXPECT_EQ(A.size(), B.size());
+}
+
+TEST(map, func_insert_or_assign_1) {
+  s21::map<int, int> A = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  std::map<int, int> B = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  EXPECT_EQ(A.insert_or_assign(1, 1).second, B.insert_or_assign(1, 1).second);
+  EXPECT_TRUE(compare_map(A, B));
+  EXPECT_EQ(A.size(), B.size());
+}
+
+TEST(map, func_insert_or_assign_2) {
+  s21::map<int, int> A = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  std::map<int, int> B = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  EXPECT_EQ(A.insert_or_assign(9, 1).second, B.insert_or_assign(9, 1).second);
+  EXPECT_TRUE(compare_map(A, B));
+  EXPECT_EQ(A.size(), B.size());
+}
+
+TEST(map, func_insert_or_assign_3) {
+  s21::map<int, int> A;
+  std::map<int, int> B;
+  EXPECT_EQ(A.insert_or_assign(9, 1).second, B.insert_or_assign(9, 1).second);
+  EXPECT_TRUE(compare_map(A, B));
+  EXPECT_EQ(A.size(), B.size());
+}
+
+TEST(map, func_erase_1) {
+  s21::map<int, int> A = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  std::map<int, int> B = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  auto A1 = A.begin();
+  auto B1 = B.begin();
+  A.erase(A1);
+  B.erase(B1);
+  EXPECT_TRUE(compare_map(A, B));
+  EXPECT_EQ(A.size(), B.size());
+}
+
+TEST(map, func_erase_2) {
+  s21::map<int, int> A = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  std::map<int, int> B = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  EXPECT_ANY_THROW(A.erase(A.end()));
+  EXPECT_EQ(A.size(), B.size());
+}
+
+TEST(map, func_erase_3) {
+  s21::map<int, int> A = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}, {-1, -1}};
+  std::map<int, int> B = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}, {-1, -1}};
+  auto A1 = A.begin();
+  auto B1 = B.begin();
+  ++A1;
+  ++B1;
+  A.erase(A1);
+  B.erase(B1);
+  EXPECT_TRUE(compare_map(A, B));
+  EXPECT_EQ(A.size(), B.size());
+}
+
+TEST(map, func_swap_1) {
+  s21::map<int, int> A = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  std::map<int, int> B = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  s21::map<int, int> A1;
+  std::map<int, int> B1;
+  A1.swap(A);
+  B1.swap(B);
+  EXPECT_TRUE(compare_map(A1, B1));
+  EXPECT_EQ(A1.size(), B1.size());
+  EXPECT_EQ(A1.empty(), B1.empty());
+}
+
+TEST(map, func_swap_2) {
+  s21::map<int, int> A = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  std::map<int, int> B = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  s21::map<int, int> A1 = {{1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}};
+  std::map<int, int> B1 = {{1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}};
+  A1.swap(A);
+  B1.swap(B);
+  EXPECT_TRUE(compare_map(A1, B1));
+  EXPECT_TRUE(compare_map(A, B));
+  EXPECT_EQ(A1.size(), B1.size());
+  EXPECT_EQ(A1.empty(), B1.empty());
+  EXPECT_EQ(A.size(), B.size());
+  EXPECT_EQ(A.empty(), B.empty());
+}
+
+TEST(map, func_swap_3) {
+  s21::map<int, int> A;
+  std::map<int, int> B;
+  s21::map<int, int> A1;
+  std::map<int, int> B1;
+  A1.swap(A);
+  B1.swap(B);
+  EXPECT_EQ(A1.size(), B1.size());
+  EXPECT_EQ(A1.empty(), B1.empty());
+}
+
+TEST(map, func_merge_1) {
+  s21::map<int, int> A = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  std::map<int, int> B = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  s21::map<int, int> A1 = {{1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}};
+  std::map<int, int> B1 = {{1, 1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}};
+  A1.merge(A);
+  B1.merge(B);
+  EXPECT_TRUE(compare_map(A1, B1));
+  EXPECT_EQ(A1.size(), B1.size());
+  EXPECT_EQ(A1.empty(), B1.empty());
+  EXPECT_EQ(A.size(), B.size());
+  EXPECT_EQ(A.empty(), B.empty());
+}
+
+TEST(map, func_merge_2) {
+  s21::map<int, int> A = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  std::map<int, int> B = {{9, 9}, {10, 10}, {123, 123}, {-4, -4}};
+  s21::map<int, int> A1;
+  std::map<int, int> B1;
+  A1.merge(A);
+  B1.merge(B);
+  EXPECT_TRUE(compare_map(A1, B1));
+  EXPECT_EQ(A1.size(), B1.size());
+  EXPECT_EQ(A1.empty(), B1.empty());
+  EXPECT_EQ(A.size(), B.size());
+  EXPECT_EQ(A.empty(), B.empty());
+}
+
+TEST(map, func_contains_1) {
+  s21::map<int, int> A{{1, 1}, {2, 2}, {3, 3}, {4, 4}};
+  EXPECT_TRUE(A.contains(1));
+}
+
+TEST(map, func_contains_23) {
+  s21::map<int, int> A{{1, 1}, {2, 2}, {3, 3}, {4, 4}};
+  EXPECT_FALSE(A.contains(6));
+}
+
+TEST(map, max_size_function) {
+  s21::map<int, int> A{{1, 1}, {2, 2}, {3, 3}, {4, 4}};
+  std::map<int, int> B{{1, 1}, {2, 2}, {3, 3}, {4, 4}};
+
+  EXPECT_EQ(A.max_size(), B.max_size());
+
+  std::map<int, int> A1;
+  s21::map<int, int> B1;
+
+  EXPECT_EQ(A1.max_size(), B1.max_size());
+}
+
+TEST(map, big_erase_1) {
+  s21::map<int, int> A{{1, 1},   {2, 2},   {3, 3},  {4, 4}, {5, 5},
+                       {6, 6},   {7, 7},   {8, 8},  {9, 9}, {10, 10},
+                       {11, 11}, {12, 12}, {13, 13}};
+  std::map<int, int> B{{1, 1},   {2, 2},   {3, 3},  {4, 4}, {5, 5},
+                       {6, 6},   {7, 7},   {8, 8},  {9, 9}, {10, 10},
+                       {11, 11}, {12, 12}, {13, 13}};
+  auto A1 = A.begin();
+  auto B1 = B.begin();
+  A.erase(A1);
+  B.erase(B1);
+
+  auto A2 = A.begin();
+  auto B2 = B.begin();
+  ++A2;
+  ++A2;
+  ++B2;
+  ++B2;
+  A.erase(A2);
+  B.erase(B2);
+  EXPECT_TRUE(compare_map(A, B));
+
+  for (int i = 0; i < 11; ++i) {
+    auto A3 = A.begin();
+    A.erase(A3);
+  }
+  EXPECT_TRUE(A.empty());
 }
 
 }  // namespace s21
