@@ -30,13 +30,12 @@ public:
             *   List Helper Functions
             * 
             ***********************************/
-    
-//     friend void ListNode::insert_ListNode_before_curr(int value);
-    
-//     friend void ListNode::delete_current_ListNode();
+
 
     void print_all_valid_ListNodes();
     void print_all_ListNodes_with_hidden();
+
+    void set_front_and_back();
 
             /**********************************
             *
@@ -169,6 +168,15 @@ public:
             ***********************************/
 
 template <typename T>
+void List<T>::set_front_and_back() {
+ if (this->empty() == false) {
+    this->head_ = this->pre_head_->get_next();
+    this->tail_ = this->post_tail_->get_prev();
+ }
+ }
+
+
+template <typename T>
 void List<T>::print_all_valid_ListNodes() {
     std::cout << "\n\tSize: " << this->size() << std::endl;
     if (this->empty() == false) {
@@ -200,9 +208,7 @@ void List<T>::print_all_ListNodes_with_hidden() {
             ***********************************/ 
 
 template <typename T>
-List<T>::List() {
-//     std::cout << "No-args List constructor is working" << std::endl;
-    
+List<T>::List() {    
     size_ = 0;
     head_ = nullptr;
     tail_ = nullptr;
@@ -257,7 +263,6 @@ List<T>::List(List<T> &&l) : List() {
 
 template <typename T>
 List<T>::~List(){
-    std::cout << "List destructor is working" << std::endl;
     this->pre_head_->delete_all_ListNodes();
 }
 
@@ -483,6 +488,7 @@ void List<T>::merge(List<T>& other){
             }
         }
     }
+    this->set_front_and_back();
 }
     
 // transfers elements from list other starting from pos
@@ -503,13 +509,14 @@ void List<T>::splice(ListIterator<T> pos, List<T>& other){
         it = tmp;
 
     }
+    this->set_front_and_back();
 }
     
 // reverses the order of the elements
 template <typename T>
 void List<T>::reverse(){
     auto tmp_it_front = this->begin();
-    // auto tmp_pre_head = tmp_it_front.current->get_prev();
+
     auto tmp_it_back = this->end();
     auto tmp_it_back_back = tmp_it_back;
     tmp_it_back_back--;
@@ -535,7 +542,6 @@ void List<T>::reverse(){
         it = it_next;
     }
 
-
 }
     
 // removes consecutive duplicate elements
@@ -550,12 +556,13 @@ void List<T>::unique(){
         it = next_it;
 
     }
+    this->set_front_and_back();
 }
     
 // sorts the elements
 template <typename T>
 void List<T>::sort(){
-
+    if (this->empty() == false) {
     for (auto i = this->begin(); i != this->end(); i++) {
         auto min = i;
 
@@ -578,6 +585,8 @@ void List<T>::sort(){
             i = min;
         }
     }
+    this->set_front_and_back();
+}
 }
 
 
