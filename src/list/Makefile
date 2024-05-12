@@ -1,8 +1,8 @@
 CC= g++
 CFLAGS= -Wall -Werror -Wextra -std=c++17
 DEBUG_OPTIONS= -fdiagnostics-color=always -g
-SOURCE_FILES= s21_iterator.cc s21_list.cc s21_node.cc 
-HEADER_FILES= s21_iterator.h s21_list.h s21_node.h
+SOURCE_FILES= s21_iterator.cc s21_list.cc s21_ListNode.cc 
+HEADER_FILES= s21_iterator.h s21_list.h s21_ListNode.h
 MAIN_FILE= main.cc
 BINARY=main
 

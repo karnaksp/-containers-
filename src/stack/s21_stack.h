@@ -6,7 +6,7 @@
 #include <limits>
 
 #include "../list/s21_list.h"
-#include "../list/s21_node.h"
+#include "../list/s21_ListNode.h"
 #include "../list/s21_iterator.h"
 
 namespace s21 {
@@ -151,6 +151,7 @@ public:
     template<typename T>
     Stack<T> Stack<T>::operator=(Stack &&s){
         this->stack_ = s.stack_;
+        return *this;
     }
 
 

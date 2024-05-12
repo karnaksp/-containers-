@@ -1,69 +1,69 @@
-#ifndef S21_NODE
-#define S21_NODE
+#ifndef S21_ListNode_H
+#define S21_ListNode_H
 
 #include <iostream>
 
 namespace s21{
 
 template <typename T>
-class Node {
+class ListNode {
 private:
     T value_;
-    Node<T>* next_;
-    Node<T>* prev_;
+    ListNode<T>* next_;
+    ListNode<T>* prev_;
 
 public:
-    Node();
+    ListNode();
     
-    void insert_node_before_curr(T value);
-    void insert_node_after_curr(T value);
+    void insert_ListNode_before_curr(T value);
+    void insert_ListNode_after_curr(T value);
     
-    void delete_current_node();
+    void delete_current_ListNode();
 
-    void print_node();
-    void print_node_all();
-    Node* find_first_node();
-    Node* find_last_node();
+    void print_ListNode();
+    void print_ListNode_all();
+    ListNode* find_first_ListNode();
+    ListNode* find_last_ListNode();
 
-    // ~Node();
+    // ~ListNode();
 
-    void delete_all_nodes_curr_and_forward();
-    void delete_all_nodes();
+    void delete_all_ListNodes_curr_and_forward();
+    void delete_all_ListNodes();
 
     // getters
 
     T& get_value();
-    Node<T>* get_prev();
-    Node<T>* get_next();
+    ListNode<T>* get_prev();
+    ListNode<T>* get_next();
 
     // setters
 
     void set_value(T value);
-    void set_prev(Node<T>* new_prev);
-    void set_next(Node<T>* new_next);
+    void set_prev(ListNode<T>* new_prev);
+    void set_next(ListNode<T>* new_next);
 
     // comparison
 
-    bool operator==(const Node<T> &rhs);
-    bool operator<(const Node<T> &rhs);
+    bool operator==(const ListNode<T> &rhs);
+    bool operator<(const ListNode<T> &rhs);
 
     // swap
 
-    void swap(Node<T>& other);
+    void swap(ListNode<T>& other);
 };
 
 
 template <typename T>
-Node<T>::Node() 
+ListNode<T>::ListNode() 
     :value_ {},  next_ {nullptr}, prev_ {nullptr}  {
-        // std::cout << "Node no-param constructor is working" << std::endl;
+        // std::cout << "ListNode no-param constructor is working" << std::endl;
     }
 
 template <typename T>
-void Node<T>::insert_node_before_curr(T value){
-    // std::cout << "insert_node_before_curr is working" << std::endl;
+void ListNode<T>::insert_ListNode_before_curr(T value){
+    // std::cout << "insert_ListNode_before_curr is working" << std::endl;
     
-    Node<T>* tmp_new = new Node<T>;
+    ListNode<T>* tmp_new = new ListNode<T>;
 
     tmp_new->value_ = value;
     
@@ -79,10 +79,10 @@ void Node<T>::insert_node_before_curr(T value){
 }
 
 template <typename T>
-void Node<T>::insert_node_after_curr(T value){
-    // std::cout << "insert_node_after_curr is working" << std::endl;
+void ListNode<T>::insert_ListNode_after_curr(T value){
+    // std::cout << "insert_ListNode_after_curr is working" << std::endl;
 
-    Node<T>* tmp_new = new Node<T>;
+    ListNode<T>* tmp_new = new ListNode<T>;
 
     tmp_new->value_ = value;
 
@@ -98,7 +98,7 @@ void Node<T>::insert_node_after_curr(T value){
 }
 
 template <typename T>
-void Node<T>::delete_current_node(){
+void ListNode<T>::delete_current_ListNode(){
     if (prev_ != nullptr) {
         prev_->next_ = next_;
     }
@@ -110,8 +110,8 @@ void Node<T>::delete_current_node(){
 }
 
 template <typename T>
-void Node<T>::print_node(){
-    std::cout << "\tPrint Node" << std::endl;
+void ListNode<T>::print_ListNode(){
+    std::cout << "\tPrint ListNode" << std::endl;
     std::cout << "Value: " << value_ << std::endl;
     std::cout << "Curr: " << this << std::endl;
     std::cout << "Prev: " << prev_ << std::endl;
@@ -119,20 +119,20 @@ void Node<T>::print_node(){
 }
 
 template <typename T>
-void Node<T>::print_node_all(){
-    Node<T>* first_element = this->find_first_node();
+void ListNode<T>::print_ListNode_all(){
+    ListNode<T>* first_element = this->find_first_ListNode();
 
     int i = 0;
-    for (Node<T>* curr = first_element; curr != nullptr; curr = curr->next_) {
-        std::cout << "\nNode number " << i << std::endl;
-        curr->print_node();
+    for (ListNode<T>* curr = first_element; curr != nullptr; curr = curr->next_) {
+        std::cout << "\nListNode number " << i << std::endl;
+        curr->print_ListNode();
         i++;
     }
 }
 
 template <typename T>
-Node<T>* Node<T>::find_first_node(){
-    Node* curr = this;
+ListNode<T>* ListNode<T>::find_first_ListNode(){
+    ListNode* curr = this;
     for (; curr != nullptr; curr = curr->prev_){
         if (curr->prev_ == nullptr) {
             break;
@@ -142,8 +142,8 @@ Node<T>* Node<T>::find_first_node(){
 }
 
 template <typename T>
-Node<T>* Node<T>::find_last_node(){
-    Node<T>* curr = this;
+ListNode<T>* ListNode<T>::find_last_ListNode(){
+    ListNode<T>* curr = this;
     for (; curr != nullptr; curr = curr->next_){
         if (curr->next_ == nullptr) {
             break;
@@ -153,72 +153,72 @@ Node<T>* Node<T>::find_last_node(){
 }
 
 template <typename T>
-void Node<T>::delete_all_nodes_curr_and_forward(){
-    for (Node<T>* curr = this; curr != nullptr;) {
-        Node<T>* tmp = curr->next_;
+void ListNode<T>::delete_all_ListNodes_curr_and_forward(){
+    for (ListNode<T>* curr = this; curr != nullptr;) {
+        ListNode<T>* tmp = curr->next_;
         delete curr;
         curr = tmp;
     }
 }
 
 template <typename T>
-void Node<T>::delete_all_nodes(){
-    Node<T> * first_element = this->find_first_node();
-    first_element->delete_all_nodes_curr_and_forward();
+void ListNode<T>::delete_all_ListNodes(){
+    ListNode<T> * first_element = this->find_first_ListNode();
+    first_element->delete_all_ListNodes_curr_and_forward();
 }
 
 
 // template<class T>
-// Node::~Node(){
+// ListNode::~ListNode(){
 //     delete this;
 // }
 
 
     // getters
     template <typename T>
-    T& Node<T>::get_value() {
+    T& ListNode<T>::get_value() {
         return this->value_;
     }
 
     template <typename T>
-    Node<T>* Node<T>::get_prev() {
+    ListNode<T>* ListNode<T>::get_prev() {
         return this->prev_;
     }
 
     template <typename T>
-    Node<T>* Node<T>::get_next(){
+    ListNode<T>* ListNode<T>::get_next(){
         return this->next_;
     }
 
     // setters
 
     template <typename T>
-    void Node<T>::set_value(T value) {
+    void ListNode<T>::set_value(T value) {
         this->value_ = value;
     }
 
     template <typename T>
-    void Node<T>::set_prev(Node<T>* new_prev) {
+    void ListNode<T>::set_prev(ListNode<T>* new_prev) {
         this->prev_ = new_prev;
     }
 
     template <typename T>
-    void Node<T>::set_next(Node<T>* new_next) {
+    void ListNode<T>::set_next(ListNode<T>* new_next) {
         this->next_ = new_next;
     }
 
     template <typename T>
-    bool Node<T>::operator==(const Node<T> &rhs) {
+    bool ListNode<T>::operator==(const ListNode<T> &rhs) {
         return this->value_ == rhs.value_;
     }
 
     template <typename T>
-    bool Node<T>::operator<(const Node<T> &rhs){
+    bool ListNode<T>::operator<(const ListNode<T> &rhs){
         return this->value_ < rhs.value_;
     }
 
     template <typename T>
-    void Node<T>::swap(Node<T>& other){
+    void ListNode<T>::swap(ListNode<T>& other){
         auto prev_of_this = this->prev_;
         auto next_of_this = this->next_;
 

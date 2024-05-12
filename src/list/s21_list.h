@@ -6,7 +6,7 @@
 #include <limits>
 
 #include "s21_iterator.h"
-#include "s21_node.h"
+#include "s21_ListNode.h"
 
 namespace s21 {
 
@@ -18,10 +18,10 @@ public:
 
     using size_type = std::size_t;
 private:
-    Node<T>* head_;
-    Node<T>* tail_;
-    Node<T>* pre_head_;
-    Node<T>* post_tail_;
+    ListNode<T>* head_;
+    ListNode<T>* tail_;
+    ListNode<T>* pre_head_;
+    ListNode<T>* post_tail_;
     size_type size_;
 
 public:    
@@ -30,13 +30,12 @@ public:
             *   List Helper Functions
             * 
             ***********************************/
-    
-//     friend void Node::insert_node_before_curr(int value);
-    
-//     friend void Node::delete_current_node();
 
-    void print_all_valid_nodes();
-    void print_all_nodes_with_hidden();
+
+    void print_all_valid_ListNodes();
+    void print_all_ListNodes_with_hidden();
+
+    void set_front_and_back();
 
             /**********************************
             *
@@ -169,28 +168,37 @@ public:
             ***********************************/
 
 template <typename T>
-void List<T>::print_all_valid_nodes() {
+void List<T>::set_front_and_back() {
+ if (this->empty() == false) {
+    this->head_ = this->pre_head_->get_next();
+    this->tail_ = this->post_tail_->get_prev();
+ }
+ }
+
+
+template <typename T>
+void List<T>::print_all_valid_ListNodes() {
     std::cout << "\n\tSize: " << this->size() << std::endl;
     if (this->empty() == false) {
         int count = 0;
-        for (Node<T>* curr = this->head_; curr != nullptr; curr = curr->get_next()) {
+        for (ListNode<T>* curr = this->head_; curr != nullptr; curr = curr->get_next()) {
             if (curr == post_tail_) {
                 break;
             }
             std::cout << "\tList element: " << count << std::endl;
-            curr->print_node();
+            curr->print_ListNode();
             count++;
         }
     }
 }
 
 template <typename T>
-void List<T>::print_all_nodes_with_hidden() {
+void List<T>::print_all_ListNodes_with_hidden() {
     std::cout << "\n\tpre_head_: " << std::endl;
-    this->pre_head_->print_node();
-    this->print_all_valid_nodes();
+    this->pre_head_->print_ListNode();
+    this->print_all_valid_ListNodes();
     std::cout << "\n\tpost_tail_: " << this->post_tail_ << std::endl;
-    this->post_tail_->print_node();
+    this->post_tail_->print_ListNode();
 }
 
             /**********************************
@@ -200,17 +208,15 @@ void List<T>::print_all_nodes_with_hidden() {
             ***********************************/ 
 
 template <typename T>
-List<T>::List() {
-//     std::cout << "No-args List constructor is working" << std::endl;
-    
+List<T>::List() {    
     size_ = 0;
     head_ = nullptr;
     tail_ = nullptr;
 
-    pre_head_ = new Node<T>;
+    pre_head_ = new ListNode<T>;
     pre_head_->set_prev(nullptr);
 
-    post_tail_ = new Node<T>;
+    post_tail_ = new ListNode<T>;
     post_tail_->set_next(nullptr);
 
     pre_head_->set_next(post_tail_);
@@ -257,8 +263,7 @@ List<T>::List(List<T> &&l) : List() {
 
 template <typename T>
 List<T>::~List(){
-    std::cout << "List destructor is working" << std::endl;
-    this->pre_head_->delete_all_nodes();
+    this->pre_head_->delete_all_ListNodes();
 }
 
 template <typename T>
@@ -341,7 +346,7 @@ size_type List<T>::size(){
 template <typename T>
 size_type List<T>::max_size() {
         auto minus_list = std::numeric_limits<std::size_t>::max() - sizeof(List<T>);
-        return  minus_list /  sizeof(Node<T>) ;
+        return  minus_list /  sizeof(ListNode<T>) ;
 }
 
             /**********************************
@@ -358,7 +363,7 @@ void List<T>::clear() {
             break;
         }
         auto tmp = curr->get_next();
-        curr->delete_current_node();
+        curr->delete_current_ListNode();
         curr = tmp;
      }
      this->size_ = 0;
@@ -368,7 +373,7 @@ template <typename T>
 ListIterator<T> List<T>::insert(ListIterator<T> pos, const T& value){
         auto pos_tmp = pos;
         auto ref = pos.current;
-        ref->insert_node_before_curr(value);
+        ref->insert_ListNode_before_curr(value);
         this->size_++;
         if (ref == this->head_) {
                 this->head_ = this->head_->get_prev();
@@ -380,7 +385,7 @@ template <typename T>
 void List<T>::insert(ListConstIterator<T> pos, const T& value){
         auto pos_tmp = pos;
         auto ref = pos.current;
-        ref->insert_node_before_curr(value);
+        ref->insert_ListNode_before_curr(value);
         this->size_++;
         if (ref == this->head_) {
                 this->head_ = this->head_->get_prev();
@@ -392,7 +397,7 @@ void List<T>::erase(ListIterator<T> pos){
         auto pos_tmp = pos;
         auto ref = pos.current;
         auto tmp = this->head_->get_next();
-        ref->delete_current_node();
+        ref->delete_current_ListNode();
         if (ref == this->head_) {
                 this->head_ = tmp;
         }
@@ -401,7 +406,7 @@ void List<T>::erase(ListIterator<T> pos){
 
 template <typename T>
 void List<T>::push_back(const T& value){
-    this->post_tail_->insert_node_before_curr(value);
+    this->post_tail_->insert_ListNode_before_curr(value);
     this->tail_ = this->post_tail_->get_prev();
     if(this->empty() == true) {
         this->head_ = this->tail_;
@@ -413,7 +418,7 @@ template <typename T>
 void List<T>::pop_back(){
     if (this->empty() == false) {
         auto tmp = this->tail_->get_prev();
-        this->tail_->delete_current_node();
+        this->tail_->delete_current_ListNode();
         this->tail_ = tmp;
         this->size_--;
     }
@@ -421,7 +426,7 @@ void List<T>::pop_back(){
     
 template <typename T>
 void List<T>::push_front(const T& value){
-    this->pre_head_->insert_node_after_curr(value);
+    this->pre_head_->insert_ListNode_after_curr(value);
     this->head_= this->pre_head_->get_next();
     this->size_++;
 }
@@ -430,7 +435,7 @@ template <typename T>
 void List<T>::pop_front(){
     if (this->empty() == false) {
         auto tmp = this->head_->get_next();
-        this->head_->delete_current_node();
+        this->head_->delete_current_ListNode();
         this->head_ = tmp;
         this->size_--;
     }
@@ -483,6 +488,7 @@ void List<T>::merge(List<T>& other){
             }
         }
     }
+    this->set_front_and_back();
 }
     
 // transfers elements from list other starting from pos
@@ -503,13 +509,14 @@ void List<T>::splice(ListIterator<T> pos, List<T>& other){
         it = tmp;
 
     }
+    this->set_front_and_back();
 }
     
 // reverses the order of the elements
 template <typename T>
 void List<T>::reverse(){
     auto tmp_it_front = this->begin();
-    // auto tmp_pre_head = tmp_it_front.current->get_prev();
+
     auto tmp_it_back = this->end();
     auto tmp_it_back_back = tmp_it_back;
     tmp_it_back_back--;
@@ -535,7 +542,6 @@ void List<T>::reverse(){
         it = it_next;
     }
 
-
 }
     
 // removes consecutive duplicate elements
@@ -550,12 +556,13 @@ void List<T>::unique(){
         it = next_it;
 
     }
+    this->set_front_and_back();
 }
     
 // sorts the elements
 template <typename T>
 void List<T>::sort(){
-
+    if (this->empty() == false) {
     for (auto i = this->begin(); i != this->end(); i++) {
         auto min = i;
 
@@ -578,6 +585,8 @@ void List<T>::sort(){
             i = min;
         }
     }
+    this->set_front_and_back();
+}
 }
 
 
