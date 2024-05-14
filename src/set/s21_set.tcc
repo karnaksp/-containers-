@@ -104,15 +104,4 @@ typename set<key_type>::iterator set<key_type>::find(const key_type& key) {
   return RBTree->TreeSearch(key);
 }
 
-template <class key_type>
-template <typename... Args>
-std::vector<std::pair<typename set<key_type>::iterator, bool>>
-set<key_type>::insert_many(Args&&... args) {
-  std::vector<std::pair<iterator, bool>> result;
-  for (auto i : {std::forward<Args>(args)...}) {
-    std::pair<iterator, bool> res = insert(i);
-    result.push_back(res);
-  }
-  return result;
-}
 };  // namespace s21
