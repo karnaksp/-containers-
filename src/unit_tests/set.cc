@@ -369,22 +369,6 @@ TEST(set, func_find_2) {
   EXPECT_TRUE(A1 == A2);
 }
 
-TEST(set, func_insert_many_1) {
-  s21::set<int> A{1, 2, 3, 4, 5, 5, 5, 5, -4};
-  std::set<int> B{1, 2, 3, 4, 5, 5, 5, 5, -4, 9, 9, 7, 4};
-  A.insert_many(9, 9, 7, 4);
-  EXPECT_TRUE(compare_set(A, B));
-  EXPECT_EQ(A.size(), B.size());
-}
-
-TEST(set, func_insert_many_2) {
-  s21::set<int> A;
-  std::set<int> B{9, 9, 7, 4};
-  A.insert_many(9, 9, 7, 4);
-  EXPECT_TRUE(compare_set(A, B));
-  EXPECT_EQ(A.size(), B.size());
-}
-
 TEST(set, max_size_function) {
   s21::set<int> A{9, 9, 7, 4};
   std::set<int> B{9, 9, 7, 4};

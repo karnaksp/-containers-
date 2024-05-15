@@ -55,9 +55,6 @@ class set {
 
   iterator find(const key_type &key);
 
-  template <typename... Args>
-  std::vector<std::pair<iterator, bool>> insert_many(Args &&...args);
-
  private:
   tree_type *RBTree;
 };
