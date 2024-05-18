@@ -289,9 +289,7 @@ class Vector {
     return data_[index];
   }
 
-  size_t MaxSize() const noexcept {
-    return std::numeric_limits<size_t>::max();
-  }
+  size_t MaxSize() const noexcept { return std::numeric_limits<size_t>::max(); }
 };
 
 template <typename T>
