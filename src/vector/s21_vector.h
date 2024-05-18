@@ -263,6 +263,34 @@ class Vector {
     assert(size_ > 0);
     return data_[size_ - 1];
   }
+
+  void shrink_to_fit() {
+    if (size_ < data_.Capacity()) {
+      RawMemory<T> new_data(size_);
+      std::uninitialized_move_n(data_.GetAddress(), size_,
+                                new_data.GetAddress());
+      std::destroy_n(data_.GetAddress(), size_);
+      data_.Swap(new_data);
+    }
+  }
+
+  const T &at(size_t index) const {
+    if (index >= size_) {
+      throw std::out_of_range("Index out of range in Vector::at()");
+    }
+    return data_[index];
+  }
+
+  T &at(size_t index) {
+    if (index >= size_) {
+      throw std::out_of_range("Index out of range in Vector::at()");
+    }
+    return data_[index];
+  }
+
+  size_t max_size() const noexcept {
+    return std::numeric_limits<size_t>::max();
+  }
 };
 
 template <typename T>
