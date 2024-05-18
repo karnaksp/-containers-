@@ -92,6 +92,14 @@ class Vector {
     std::uninitialized_value_construct_n(data_.GetAddress(), size);
   }
 
+  Vector(std::initializer_list<T> init_list)
+      : data_(init_list.size()), size_(init_list.size()) {
+    auto it = init_list.begin();
+    for (size_t i = 0; i < size_; ++i) {
+      data_[i] = *it++;
+    }
+  }
+
   // copy constructor
   Vector(const Vector &other) : data_(other.size_), size_(other.size_) {
     std::uninitialized_copy_n(other.data_.GetAddress(), size_,
@@ -227,6 +235,33 @@ class Vector {
   T &operator[](size_t index) noexcept {
     assert(index < size_);
     return data_[index];
+  }
+
+  bool Empty() const noexcept { return size_ == 0; }
+
+  void Clear() noexcept {
+    std::destroy_n(data_.GetAddress(), size_);
+    size_ = 0;
+  }
+
+  const T &Front() const {
+    assert(size_ > 0);
+    return data_[0];
+  }
+
+  T &Front() {
+    assert(size_ > 0);
+    return data_[0];
+  }
+
+  const T &Back() const {
+    assert(size_ > 0);
+    return data_[size_ - 1];
+  }
+
+  T &Back() {
+    assert(size_ > 0);
+    return data_[size_ - 1];
   }
 };
 

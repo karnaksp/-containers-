@@ -1,0 +1,2 @@
+  lines......: 98.0% (2522 of 2574 lines)
+  functions..: 99.9% (1181 of 1182 functions)

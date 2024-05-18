@@ -1,0 +1,49 @@
+Capturing coverage data from .
+Subroutine read_intermediate_text redefined at /usr/bin/geninfo line 2623.
+Subroutine read_intermediate_json redefined at /usr/bin/geninfo line 2655.
+Subroutine intermediate_text_to_info redefined at /usr/bin/geninfo line 2703.
+Subroutine intermediate_json_to_info redefined at /usr/bin/geninfo line 2792.
+Subroutine get_output_fd redefined at /usr/bin/geninfo line 2872.
+Subroutine print_gcov_warnings redefined at /usr/bin/geninfo line 2900.
+Subroutine process_intermediate redefined at /usr/bin/geninfo line 2930.
+Found gcov version: 11.4.0
+Using intermediate gcov format
+Scanning . for .gcda files ...
+Found 7 data files in .
+Processing unit_tests/vector.gcda
+Processing unit_tests/set.gcda
+Processing unit_tests/map.gcda
+Processing unit_tests/main.gcda
+Processing unit_tests/list.gcda
+Processing unit_tests/queue.gcda
+Processing unit_tests/stack.gcda
+Excluded data for 43 files due to include/exclude options
+Finished .info-file creation
+Reading data file Coverage_Report.info
+Found 19 entries.
+Found common filename prefix "/home/corrie/edu/-containers-/src"
+Writing .css and .png files.
+Generating output.
+Processing file list/s21_iterator.h
+Processing file list/s21_ListNode.h
+Processing file list/s21_list.h
+Processing file map/s21_map.h
+Processing file map/s21_map.tcc
+Processing file queue/s21_queue.h
+Processing file rb-tree/s21_tree.tcc
+Processing file rb-tree/s21_tree.h
+Processing file set/s21_set.tcc
+Processing file set/s21_set.h
+Processing file stack/s21_stack.h
+Processing file unit_tests/map.cc
+Processing file unit_tests/list.cc
+Processing file unit_tests/vector.cc
+Processing file unit_tests/stack.cc
+Processing file unit_tests/main.cc
+Processing file unit_tests/queue.cc
+Processing file unit_tests/set.cc
+Processing file vector/s21_vector.h
+Writing directory view page.
+Overall coverage rate:
+  lines......: 98.0% (2522 of 2574 lines)
+  functions..: 99.9% (1181 of 1182 functions)

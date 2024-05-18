@@ -586,4 +586,75 @@ TEST(VectorTest, Erase2) {
   EXPECT_EQ(*it, 30);
 }
 
+TEST(VectorTest, InitListConstructor1) {
+  Vector<int> vec = {};
+  EXPECT_EQ(vec.Size(), 0);
+}
+
+TEST(VectorTest, InitListConstructor2) {
+  Vector<int> vec = {1, 2, 3, 4, 5};
+
+  EXPECT_EQ(vec.Size(), 5);
+  EXPECT_EQ(vec[0], 1);
+  EXPECT_EQ(vec[1], 2);
+  EXPECT_EQ(vec[2], 3);
+  EXPECT_EQ(vec[3], 4);
+  EXPECT_EQ(vec[4], 5);
+}
+
+TEST(VectorTest, ConstIndex) {
+  const Vector<int> vec = {1, 2, 3, 4, 5};
+
+  EXPECT_EQ(vec[0], 1);
+  EXPECT_EQ(vec[2], 3);
+  EXPECT_EQ(vec[4], 5);
+}
+
+TEST(VectorTest, NonConstIndex) {
+  Vector<int> vec = {1, 2, 3, 4, 5};
+  EXPECT_EQ(vec[0], 1);
+  EXPECT_EQ(vec[2], 3);
+  EXPECT_EQ(vec[4], 5);
+  vec[1] = 10;
+  vec[3] = 20;
+  EXPECT_EQ(vec[1], 10);
+  EXPECT_EQ(vec[3], 20);
+}
+
+TEST(VectorTest, EmptyMethodEmptyVector) {
+  Vector<int> vec;
+
+  EXPECT_TRUE(vec.Empty());
+}
+
+TEST(VectorTest, EmptyVector) {
+  Vector<int> vec = {1, 2, 3};
+  EXPECT_FALSE(vec.Empty());
+}
+
+TEST(VectorTest, ClearVector) {
+  Vector<int> vec = {1, 2, 3};
+  EXPECT_FALSE(vec.Empty());
+  vec.Clear();
+  EXPECT_TRUE(vec.Empty());
+  EXPECT_EQ(vec.Size(), 0);
+  EXPECT_EQ(vec.Capacity(), 3);
+}
+
+TEST(VectorTest, FrontAndBack) {
+  Vector<int> vec = {1, 2, 3, 4, 5};
+  EXPECT_EQ(vec.Front(), 1);
+  EXPECT_EQ(vec.Back(), 5);
+  vec.Front() = 10;
+  vec.Back() = 50;
+  EXPECT_EQ(vec.Front(), 10);
+  EXPECT_EQ(vec.Back(), 50);
+}
+
+TEST(VectorTest, FrontAndBackEmpty) {
+  Vector<int> vec;
+  ASSERT_DEATH({ vec.Front(); }, "");
+  ASSERT_DEATH({ vec.Back(); }, "");
+}
+
 }  // namespace s21
