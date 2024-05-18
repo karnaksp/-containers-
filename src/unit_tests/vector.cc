@@ -661,7 +661,7 @@ TEST(VectorTest, ShrinkToFit1) {
   Vector<int> vec = {1, 2, 3, 4, 5};
   vec.Reserve(10);
   size_t initial_capacity = vec.Capacity();
-  vec.shrink_to_fit();
+  vec.ShrinkToFit();
   EXPECT_EQ(vec.Capacity(), vec.Size());
   EXPECT_LT(vec.Capacity(), initial_capacity);
 }
@@ -669,23 +669,23 @@ TEST(VectorTest, ShrinkToFit1) {
 TEST(VectorTest, ShrinkToFit2) {
   Vector<int> vec = {1, 2, 3, 4, 5};
   size_t initial_capacity = vec.Capacity();
-  vec.shrink_to_fit();
+  vec.ShrinkToFit();
   EXPECT_EQ(vec.Capacity(), initial_capacity);
 }
 
 TEST(VectorTest, At) {
   Vector<int> vec = {1, 2, 3, 4, 5};
-  EXPECT_EQ(vec.at(0), 1);
-  EXPECT_EQ(vec.at(2), 3);
-  EXPECT_EQ(vec.at(4), 5);
-  EXPECT_THROW(vec.at(5), std::out_of_range);
-  EXPECT_THROW(vec.at(10), std::out_of_range);
+  EXPECT_EQ(vec.At(0), 1);
+  EXPECT_EQ(vec.At(2), 3);
+  EXPECT_EQ(vec.At(4), 5);
+  EXPECT_THROW(vec.At(5), std::out_of_range);
+  EXPECT_THROW(vec.At(10), std::out_of_range);
 }
 
 TEST(VectorTest, MaxSize) {
   Vector<int> vec;
-  EXPECT_GT(vec.max_size(), 0);
-  EXPECT_EQ(vec.max_size(), std::numeric_limits<size_t>::max());
+  EXPECT_GT(vec.MaxSize(), 0);
+  EXPECT_EQ(vec.MaxSize(), std::numeric_limits<size_t>::max());
 }
 
 }  // namespace s21

@@ -232,6 +232,7 @@ class Vector {
   const T &operator[](size_t index) const noexcept {
     return const_cast<Vector &>(*this)[index];
   }
+
   T &operator[](size_t index) noexcept {
     assert(index < size_);
     return data_[index];
@@ -264,7 +265,7 @@ class Vector {
     return data_[size_ - 1];
   }
 
-  void shrink_to_fit() {
+  void ShrinkToFit() {
     if (size_ < data_.Capacity()) {
       RawMemory<T> new_data(size_);
       std::uninitialized_move_n(data_.GetAddress(), size_,
@@ -274,21 +275,21 @@ class Vector {
     }
   }
 
-  const T &at(size_t index) const {
+  const T &At(size_t index) const {
     if (index >= size_) {
       throw std::out_of_range("Index out of range in Vector::at()");
     }
     return data_[index];
   }
 
-  T &at(size_t index) {
+  T &At(size_t index) {
     if (index >= size_) {
       throw std::out_of_range("Index out of range in Vector::at()");
     }
     return data_[index];
   }
 
-  size_t max_size() const noexcept {
+  size_t MaxSize() const noexcept {
     return std::numeric_limits<size_t>::max();
   }
 };
