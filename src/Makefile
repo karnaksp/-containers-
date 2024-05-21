@@ -79,4 +79,8 @@ valgrind: build
 open_report:
 	@open ./report/index.html || xdg-open ./report/index.html || start ./report/index.html
 
+documentation:
+	@doxygen ./Doxyfile
+	@open ./docs/html/index.html
+
 .PHONY: clean test build style-check
