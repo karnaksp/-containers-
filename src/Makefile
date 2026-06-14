@@ -3,6 +3,7 @@ SHELL = /bin/bash
 CC = g++
 OPTION_FLAGS = -Wall -Werror -Wextra -g
 CPP_FLAGS = -std=c++17 -lstdc++
+COMPILE_FLAGS = $(filter-out -lstdc++,$(CPP_FLAGS))
 GCOV_FLAGS = -fprofile-arcs -ftest-coverage
 GTEST_FLAGS = -lgtest -lgtest_main
 
@@ -21,15 +22,20 @@ TEST_FILES = $(wildcard $(DIR_TEST)/*.cc)
 TEST_OBJ = $(TEST_FILES:.cc=.o)
 LIBRARY_NAME = s21_containers.a
 COV_DIR = report
+SMOKE_SRC = .s21_containers_smoke.cc
+SMOKE_OBJ = .s21_containers_smoke.o
 
 # ------------------------------- TASKS ------------------------------------------ #
 all: clean cat build test style-check gcov_report valgrind
 
 %.o: %.cc
-	@$(CC) $(OPTION_FLAGS) $(CPP_FLAGS) $(GCOV_FLAGS) -c $< -o $@
+	@$(CC) $(OPTION_FLAGS) $(COMPILE_FLAGS) $(GCOV_FLAGS) -c $< -o $@
 
 $(LIBRARY_NAME): $(OBJ_FILES)
-	@ar rcs $(LIBRARY_NAME) $(OBJ_FILES)
+	@printf '#include "s21_containers.h"\n' > $(SMOKE_SRC)
+	@$(CC) $(OPTION_FLAGS) $(COMPILE_FLAGS) -c $(SMOKE_SRC) -o $(SMOKE_OBJ)
+	@ar rcs $(LIBRARY_NAME) $(OBJ_FILES) $(SMOKE_OBJ)
+	@rm -f $(SMOKE_SRC) $(SMOKE_OBJ) .s21_containers_smoke*.tmp
 
 build: $(LIBRARY_NAME)
 
@@ -43,6 +49,7 @@ cat:
 
 clean:
 	@rm -rf report $(COV_DIR) ./test $(LIBRARY_NAME) $(TEST_OBJ)
+	@rm -f $(SMOKE_SRC) $(SMOKE_OBJ) .s21_containers_smoke*.tmp
 	@rm -f *.o *.a *.out */*.gcda */*.gcno *.info *.txt
 
 style-check:
@@ -58,8 +65,8 @@ style-i:
 gcov_report: test
 	@./cat.sh "GCOV_REPORT" 20
 	@echo "Overall coverage rate:"
-	@lcov --gcov-tool gcov --capture --directory . --output-file Coverage_Report.info --no-external --ignore-errors gcov > coverage_output.txt 2>&1
-	@genhtml -o $(COV_DIR) Coverage_Report.info >> coverage_output.txt 2>&1
+	@lcov --gcov-tool gcov --capture --directory . --output-file Coverage_Report.info --no-external --ignore-errors gcov,source,mismatch,inconsistent > coverage_output.txt 2>&1 || { cat coverage_output.txt; exit 1; }
+	@genhtml -o $(COV_DIR) Coverage_Report.info --ignore-errors source >> coverage_output.txt 2>&1 || { cat coverage_output.txt; exit 1; }
 	@mkdir -p $(COV_DIR)
 	@grep -E 'lines......:|functions..:' coverage_output.txt > coverage_summary.txt
 	@cat coverage_summary.txt
