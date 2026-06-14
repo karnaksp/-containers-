@@ -65,8 +65,8 @@ style-i:
 gcov_report: test
 	@./cat.sh "GCOV_REPORT" 20
 	@echo "Overall coverage rate:"
-	@lcov --gcov-tool gcov --capture --directory . --output-file Coverage_Report.info --no-external --ignore-errors gcov > coverage_output.txt 2>&1
-	@genhtml -o $(COV_DIR) Coverage_Report.info >> coverage_output.txt 2>&1
+	@lcov --gcov-tool gcov --capture --directory . --output-file Coverage_Report.info --no-external --ignore-errors gcov,source,mismatch,inconsistent > coverage_output.txt 2>&1 || { cat coverage_output.txt; exit 1; }
+	@genhtml -o $(COV_DIR) Coverage_Report.info --ignore-errors source >> coverage_output.txt 2>&1 || { cat coverage_output.txt; exit 1; }
 	@mkdir -p $(COV_DIR)
 	@grep -E 'lines......:|functions..:' coverage_output.txt > coverage_summary.txt
 	@cat coverage_summary.txt
