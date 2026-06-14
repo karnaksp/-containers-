@@ -38,7 +38,7 @@ class Iterator {
  public:
   using key_type = T;
   using reference = key_type &;
-  using const_reference = const reference;
+  using const_reference = const key_type &;
   using pointer = key_type *;
   using tree_node = s21::Node<key_type>;
   using iterator = Iterator;
